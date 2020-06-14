@@ -4,6 +4,80 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mlxt.dao.UserDao">
 
-
+    <select id="findUser" parameterType="String" resultType="com.mlxt.pojo.User">
+        <if test="tel != null and tel != '' and password != null and password != ''">
+            select * from user_info where tel = #{tel} and password = #{password}
+        </if>
+    </select>
+    
+    <insert id="insertOldman" parameterType="com.mlxt.pojo.OldMan">
+        insert into old_info(
+        <if test="id != null and id != ''">
+            id,
+        </if>
+        <if test="name != null and name != ''">
+            name,
+        </if>
+        <if test="address != null and address != ''">
+            address,
+        </if>
+        <if test="img_path != null and img_path != ''">
+            img_path
+        </if>
+        )value(
+        <if test="id != null and id != ''">
+            "#{id}",
+        </if>
+        <if test="name != null and name != ''">
+            "#{name}",
+        </if>
+        <if test="address != null and address != ''">
+            "#{address}",
+        </if>
+        <if test="img_path != null and img_path != ''">
+            "#{img_path}"
+        </if>
+        )       
+    </insert>
+    
+    <update id="updateOldman" parameterType="com.mlxt.pojo.OldMan">
+        update old_info
+        <set>
+        <if test="name != null and name != ''">
+            name = #{name},
+        </if>
+        <if test="address != null and address != ''">
+            address = #{address},
+        </if>
+        <if test="img_path != null and img_path != ''">
+            img_path = #{img_path},
+        </if>
+        </set>
+        where id = "#{id}"
+    </update>
+     
+    <update id="insertUser" parameterType="com.mlxt.pojo.User">
+      update user_info
+      <set>
+        <if test="tel != null and tel != ''">
+            tel = #{tel},
+        </if>
+        <if test="password != null and password != ''">
+            password = #{password},
+        </if>
+        </set>
+    </update>
+    
+    <update id="updateFamily" parameterType="com.mlxt.pojo.Family">
+        update fam_info
+        <set>
+        <if test="fm_tel != null and fm_tel != ''">
+            fm_tel = #{fm_tel},
+        </if>
+        <if test="fm_name != null and fm_name != ''">
+            fm_name = #{fm_name},
+        </if>
+        </set>
+    </update>
 
 </mapper>

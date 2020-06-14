@@ -1,7 +1,11 @@
 package com.mlxt.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mlxt.dao.PolicemanDao;
+import com.mlxt.pojo.OldMan;
+import com.mlxt.pojo.Policeman;
 import com.mlxt.service.PolicemanService;
 
 /**
@@ -15,5 +19,23 @@ import com.mlxt.service.PolicemanService;
 
 @Service
 public class PolicemanServiceImpl implements PolicemanService {
+	
+	@Autowired
+	private PolicemanDao policemanDao;
+
+	@Override
+	public Policeman findPolice(String account, String password) {
+		return this.policemanDao.findPolice(account, password);
+	}
+
+	@Override
+	public Integer deletePolice(String account) {
+		return this.policemanDao.deletePolice(account);
+	}
+
+	@Override
+	public OldMan findOldman(OldMan oldman) {
+		return this.policemanDao.findOldman(oldman);
+	}
 
 }

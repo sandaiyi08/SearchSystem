@@ -1,7 +1,17 @@
 package com.mlxt.controller;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
+
+import com.mlxt.pojo.User;
+import com.mlxt.service.UserService;
 
 /**
  * Filename: UserController.java
@@ -13,7 +23,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-@RequestMapping("/mlxt")
+@RequestMapping("/mlxt/user")
 public class UserController {
+	
+	@Autowired
+	private UserService userService;
+	
+	private String indexPath;
+	
+	@RequestMapping("/login")
+	public String userLogin(@Param("tel") String tel, @Param("password") String password, String radio,
+			Model model, RedirectAttributesModelMap modelMap, HttpSession session, HttpServletResponse response) {
+		indexPath = (String) session.getAttribute("indexPath");
+		User user = null;
+		if (tel != null && tel != "" && password != null && password != "") {
+			user = (User) this.userService.findUser(tel, password);
+		} else {
+			return "login";
+		}
+		if (user != null) {
+			session.setAttribute("User_SESSION", user);
+			modelMap.addFlashAttribute("user", user);
+			return "redirect:" + indexPath + "index";
+		}
+		model.addAttribute("msg", "’À∫≈ªÚ√‹¬Î ‰»Î¥ÌŒÛ£°");
+		return "login";
+	}
 
+	@RequestMapping("/logout")
+	public String userLogout(RedirectAttributesModelMap modelMap, HttpSession session) {
+		indexPath = (String) session.getAttribute("indexPath");
+		session.invalidate();
+		modelMap.clear();
+		return "redirect:" + indexPath + "index";
+	}
 }

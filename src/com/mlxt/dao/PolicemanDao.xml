@@ -4,6 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mlxt.dao.PolicemanDao">
 
-
+    <select id="findPolice" parameterType="String" resultType="com.mlxt.pojo.Policeman">
+        <if test="account != null and account != '' and password != null and password != ''">
+            select * from police_info where account = #{account} and password = #{password}
+        </if>
+    </select>
+    
+    <delete id="deletePolice" parameterType="String">
+        <if test="account != null and account != ''">
+            delete from police_info where account = #{account}
+        </if>
+    </delete>
+    
+    <select id="findOldman"  parameterType="com.mlxt.pojo.OldMan" resultType="com.mlxt.pojo.OldMan">
+        select
+            a.id a.name,
+            a.address,
+            a.img_path,
+            b.fm_tel,
+            b.fm_name 
+        from old_info a,family_info b
+        where a.id = b.om_id
+     </select>
 
 </mapper>

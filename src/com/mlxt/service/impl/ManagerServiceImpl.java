@@ -1,7 +1,10 @@
 package com.mlxt.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mlxt.dao.ManagerDao;
+import com.mlxt.pojo.Manager;
 import com.mlxt.service.ManagerService;
 
 /**
@@ -15,5 +18,13 @@ import com.mlxt.service.ManagerService;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
+	
+	@Autowired
+	private ManagerDao managerDao;
+
+	@Override
+	public Manager findManager(String account, String password) {
+		return this.managerDao.findManager(account, password);
+	}
 
 }

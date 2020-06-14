@@ -1,6 +1,9 @@
 package com.mlxt.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.mlxt.pojo.Manager;
 
 /**
  * Filename: ManagerDao.java
@@ -13,5 +16,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ManagerDao {
-	
+	// 查找管理员
+	public Manager findManager(@Param("account")String account,@Param("password")String password);
 }
