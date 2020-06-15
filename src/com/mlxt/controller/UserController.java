@@ -57,4 +57,11 @@ public class UserController {
 		modelMap.clear();
 		return "redirect:" + indexPath + "index";
 	}
+	
+	@RequestMapping("register")
+	public String userRegister(@Param("tel") String tel, @Param("password") String password, String radio,
+			Model model, RedirectAttributesModelMap modelMap, HttpSession session, HttpServletResponse response) {
+		indexPath = (String) session.getAttribute("indexPath");
+		return "userRegister";
+	}
 }
