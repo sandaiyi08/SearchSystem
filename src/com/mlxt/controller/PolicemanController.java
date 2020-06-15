@@ -39,7 +39,7 @@ public class PolicemanController {
 		if (account != null && account != "" && password != null && password != "") {
 			policeman = (Policeman) this.policemanService.findPolice(account, password);
 		} else {
-			return "login";
+			return "policeLogin";
 		}
 		if (policeman != null) {
 			session.setAttribute("Policeman_SESSION", policeman);
@@ -47,7 +47,7 @@ public class PolicemanController {
 			return "redirect:" + indexPath + "index";
 		}
 		model.addAttribute("msg", "’À∫≈ªÚ√‹¬Î ‰»Î¥ÌŒÛ£°");
-		return "login";
+		return "policeLogin";
 	}
 
 	@RequestMapping("/logout")

@@ -39,7 +39,7 @@ public class UserController {
 		if (tel != null && tel != "" && password != null && password != "") {
 			user = (User) this.userService.findUser(tel, password);
 		} else {
-			return "login";
+			return "userLogin";
 		}
 		if (user != null) {
 			session.setAttribute("User_SESSION", user);
@@ -47,7 +47,7 @@ public class UserController {
 			return "redirect:" + indexPath + "index";
 		}
 		model.addAttribute("msg", "’À∫≈ªÚ√‹¬Î ‰»Î¥ÌŒÛ£°");
-		return "login";
+		return "userLogin";
 	}
 
 	@RequestMapping("/logout")

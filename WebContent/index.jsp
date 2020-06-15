@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="exam" uri="http://mlxt.com/"%>
+<%@ taglib prefix="mlxt" uri="http://mlxt.com/"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -182,7 +182,9 @@
 								<a href="<%=userPath %>login" class="btn btn-default" type="button" onclick="userbtn()">
 									登录</a> &nbsp;&nbsp;
 								<a href="<%=managePath %>index" class="btn btn-default" type="button" onclick="adminbtn()">
-								管理 </a>
+								        管理 </a>&nbsp;&nbsp;
+								<a href="<%=userPath %>register" class="btn btn-default" type="button" onclick="userbtn()">
+                                                                        注册</a>
 							</div>
 						</form>
 						<button type="submit" class="btn btn-default" data-toggle="modal"

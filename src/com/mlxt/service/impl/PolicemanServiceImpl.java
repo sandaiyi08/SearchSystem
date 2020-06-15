@@ -1,5 +1,7 @@
 package com.mlxt.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,21 @@ public class PolicemanServiceImpl implements PolicemanService {
 	@Override
 	public OldMan findOldman(OldMan oldman) {
 		return this.policemanDao.findOldman(oldman);
+	}
+
+	@Override
+	public List<Policeman> selectAllPolicemanList() {
+		return this.policemanDao.selectAllPolicemanList();
+	}
+
+	@Override
+	public Policeman getPolicemanByAccount(String account) {
+		return this.policemanDao.getPolicemanByAccount(account);
+	}
+
+	@Override
+	public Integer insertPoliceman(Policeman policeman) {
+		return this.policemanDao.insertPoliceman(policeman);
 	}
 
 }

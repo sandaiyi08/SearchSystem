@@ -1,5 +1,7 @@
 package com.mlxt.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +49,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Integer updateFamily(Family family) {
 		return this.userDao.updateFamily(family);
+	}
+
+	@Override
+	public List<Family> selectFamilyList(String tel) {
+		return this.userDao.selectFamilyList(tel);
+	}
+
+	@Override
+	public List<User> selectAllUserList() {
+		return this.userDao.selectAllUserList();
 	}
 
 }

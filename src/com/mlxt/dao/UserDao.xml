@@ -79,5 +79,26 @@
         </if>
         </set>
     </update>
+    
+    <select id="selectFamilyList" parameterType="String" resultType="com.mlxt.pojo.Family">
+        select
+            a.id,
+            a.name,
+            a.address,
+            a.img_path,
+            b.fm_tel,
+            b.fm_name
+        from old_info a,fam_info b
+        <trim prefix="where" prefixOverrides="and">
+            and a.id = b.om_id
+            <if test="tel != null and tel != ''">
+                and b.om_id = select om_id from fam_info where fm_tel = #{tel}
+            </if>
+        </trim>  
+    </select>
+    
+    <select id="selectAllUserList" resultType="com.mlxt.pojo.User">
+        select * from user_info
+    </select>
 
 </mapper>
