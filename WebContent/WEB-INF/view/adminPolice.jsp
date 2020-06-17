@@ -1,16 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="mlxt" uri="http://mlxt.com/"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-	String examIndexPath = basePath + "exam/";
-	String studentPath = path + "/exam/student/";
-	String teacherPath = path + "/exam/teacher/";
-	String systemPath = path + "/exam/";
-	session.setAttribute("indexPath", basePath);
-	session.setAttribute("examIndexPath", examIndexPath);
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String indexPath = basePath+"mlxt/";
+    String userPath = path+"/mlxt/user/";
+    String policePath = path+"/mlxt/police/";
+    String managePath = path+"/mlxt/manage/";
+    String systemPath = path+"/mlxt/";
+    session.setAttribute("indexPath", basePath);
+    session.setAttribute("managePath", basePath+"mlxt/manage/");
 %>
 <!DOCTYPE html>
 <html>

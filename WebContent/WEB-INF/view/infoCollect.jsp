@@ -11,6 +11,7 @@
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
     session.setAttribute("indexPath", basePath);
+    session.setAttribute("userPath", basePath+"mlxt/user/");
 %>
 <!DOCTYPE html>
 <html>

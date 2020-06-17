@@ -30,11 +30,19 @@ public class PolicemanController {
 	private PolicemanService policemanService;
 	
 	private String indexPath;
+	private String policePath;
 	
 	@RequestMapping("/login")
+	public String policeLoginPage(HttpSession session) {
+		indexPath = (String) session.getAttribute("indexPath");
+		return "policeLogin";
+	}
+	
+	@RequestMapping("/login.do")
 	public String policeLogin(@Param("account") String account, @Param("password") String password, String radio,
 			Model model, RedirectAttributesModelMap modelMap, HttpSession session, HttpServletResponse response) {
 		indexPath = (String) session.getAttribute("indexPath");
+		policePath = (String) session.getAttribute("policePath");
 		Policeman policeman = null;
 		if (account != null && account != "" && password != null && password != "") {
 			policeman = (Policeman) this.policemanService.findPolice(account, password);
@@ -44,7 +52,7 @@ public class PolicemanController {
 		if (policeman != null) {
 			session.setAttribute("Policeman_SESSION", policeman);
 			modelMap.addFlashAttribute("policeman", policeman);
-			return "redirect:" + indexPath + "index";
+			return "redirect:" + policePath + "find";
 		}
 		model.addAttribute("msg", "’À∫≈ªÚ√‹¬Î ‰»Î¥ÌŒÛ£°");
 		return "policeLogin";
@@ -56,5 +64,23 @@ public class PolicemanController {
 		session.invalidate();
 		modelMap.clear();
 		return "redirect:" + indexPath + "index";
+	}
+	
+	@RequestMapping("/find")
+	public String policeFind(HttpSession session) {
+		indexPath = (String) session.getAttribute("indexPath");
+		return "findOldMan";
+	}
+	
+	@RequestMapping("/findResult")
+	public String policeResult(HttpSession session) {
+		indexPath = (String) session.getAttribute("indexPath");
+		return "findOldManInfo";
+	}
+	
+	@RequestMapping("/message")
+	public String policeMessage(HttpSession session) {
+		indexPath = (String) session.getAttribute("indexPath");
+		return "policeMessage";
 	}
 }

@@ -11,6 +11,7 @@
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
     session.setAttribute("indexPath", basePath);
+    session.setAttribute("userPath", basePath+"mlxt/user/");
 %>
 <!DOCTYPE html>
 <html>
@@ -203,7 +204,7 @@
 			<div class="modal-footer">
 				<a type="button" class="btn btn-primary" onclick="validate()">注册</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				<a type="button" class="btn btn-default" href="<%=indexPath%>index">返回</a>
+				<a type="button" class="btn btn-default" href="<%=basePath%>index.jsp">返回</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</div>
 		</div>
