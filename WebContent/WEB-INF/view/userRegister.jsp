@@ -16,15 +16,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>用户登录</title>
+<title>用户注册</title>
 <link rel="shortcut icon" href="<%=basePath%>plug-in/system/images/favicon.ico">
 <link href="<%=basePath%>plug-in/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=basePath%>plug-in/jquery-3.4.1/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="<%=basePath%>plug-in/bootstrap-3.3.7/js/bootstrap.js"></script>
 
 <script type="text/javascript">
+
+    var code = 1111;
+    
 	function startload(){
-		var thiswidth = document.documentElement.clientWidth;
+		/* var thiswidth = document.documentElement.clientWidth;
 		var thisheignt = document.documentElement.clientHeight;
 		var loginform = document.getElementById("loginform");
 		var passworddiv = document.getElementById("passworddiv");
@@ -56,21 +59,68 @@
 		codetext.style.width = formwidth+"px";
 		
 		passwordtext.style.height = textheight+"px";
-		passwordtext.style.width = formwidth+"px";
+		passwordtext.style.width = formwidth+"px"; */
 		
-		if("${student}" == null && "${teacher}" == null){
+		if("${user}" == null && "${police}" == null){
 			alert("您还未登录，请登录！");
 		}else if("${msg}" != null && "${msg}" != ""){
 			alert("${msg}");
 		}
-	}
-	/*回车事件*/
+	};
+	
 	function EnterPress(e){ //传入 event 
 		var e = e || window.event;
 		if(e.keyCode == 13){
-			$("#loginform").attr("action", "<%=userPath %>login").submit();
+			validate();
 		}
-	}
+	};
+	
+	function validate() {
+        var inputCode = document.getElementById("code").value.toUpperCase();
+        var password = document.getElementById("password").value;
+        var repassword = document.getElementById("repassword").value;
+        
+        if (inputCode.length <= 0) {
+            alert("请输入验证码！");
+            return false;
+        } else if (inputCode != code) {
+            alert("验证码输入错误！");
+            
+            //createCode();
+            return false;
+        } else if (password == null || password == '' || repassword == null || repassword == '') {
+            alert("密码不能为空！");
+            return false;
+        } else if (password != repassword) {
+            alert("两次密码输入不一致！");
+            $("#addStudentForm #password").val("");
+            $("#addStudentForm #repassword").val("");
+            return false;
+        } else {
+        	saveUser();
+        }
+    };
+    
+    function saveUser() {
+        $.post("<%=userPath %>register.do", $("#addUserForm").serialize(),
+        function(data){
+            if(data == "OK"){
+            	window.location.href = "<%=userPath %>collect";
+                alert("添加用户成功！");
+                clearFormData();
+                clearSearchForm();
+            } else{
+                alert("操作失败！");
+            }
+        });
+    };
+    
+    function clearFormData(){
+    	$("#addUserForm #tel").val("");
+        $("#addUserForm #password").val("");
+        $("#addUserForm #repassword").val("");
+        $("#addUserForm #code").val("");
+    };
 </script>
 
 <style type="text/css">
@@ -98,55 +148,66 @@
 </head>
 
 
-<body style=" background: url(plug-in/system/images/face1.jpg) no-repeat center center fixed; background-size: 100%;">
-    <div class="modal-dialog" style="margin-top: 7.5%;width: 500px; height: 500px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-center" id="myModalLabel">注&nbsp;&nbsp;&nbsp;&nbsp;册</h4>
-            </div>
-            <div class="modal-body" id = "model-body" style="height: 400px">
-            	<form class="form-horizontal" role="form">
-				  <div class="form-group" >
-					  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-					  <label for="firstname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo1.png" width="30" height="30"></label>
-					  <div class="col-sm-10">
-					      <input type="text" class="form-control" id="firstname" placeholder="手机号 " style="width: 310px;">
-					  </div>
-				  </div>
-				  <div class="form-group" >
-					  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-					  <label for="firstname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo2.png" width="30" height="30"></label>
-					  <div class="col-sm-10">
-					      <input type="text" class="form-control" id="firstname" placeholder="密码" style="width: 310px;">
-					  </div>
-				  </div>
-				  <div class="form-group" >
-					  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-					   <label for="firstname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo2.png" width="30" height="30"></label>
-					   <div class="col-sm-10">
-					     <input type="text" class="form-control" id="firstname" placeholder="确认密码" style="width: 310px;">
-					   </div>
-				  </div>
-				  <div class="form-group">
-					  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-					  <label for="lastname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo3.png" width="25" height="30"></label>
-					  <div class="col-sm-10">
-						  	<div class="input-group">
-								<input  id="password" name="password" type="text" class="form-control" placeholder="密码" autocomplete="off" style="width: 240px;">
-								<button class="btn btn-default" type="button">验证码</button>	
-							</div>		
-					  </div>
-				  </div>
+<body
+	style="background: url(plug-in/system/images/face1.jpg) no-repeat center center fixed; background-size: 100%;" 
+	onkeydown="EnterPress()">
+	<div class="modal-dialog"
+		style="margin-top: 7.5%; width: 500px; height: 500px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-center" id="myModalLabel">注&nbsp;&nbsp;&nbsp;&nbsp;册</h4>
+			</div>
+			<div class="modal-body" id="model-body" style="height: 400px">
+				<form class="form-horizontal" role="form" id="addUserForm">
+					<div class="form-group">
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+						<label for="tel" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo1.png" width="30" height="30"></label>
+						<div class="col-sm-10">
+							<input id="tel" name="tel" type="text" class="form-control"
+								placeholder="手机号 " style="width: 310px;">
+						</div>
+					</div>
+					<div class="form-group">
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+						<label for="password" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo2.png" width="30" height="30"></label>
+						<div class="col-sm-10">
+							<input id="password" name="password" type="text"
+								class="form-control" placeholder="密码" style="width: 310px;">
+						</div>
+					</div>
+					<div class="form-group">
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+						<label for="repassword" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo2.png" width="30" height="30"></label>
+						<div class="col-sm-10">
+							<input id="repassword" name="repassword" type="text"
+								class="form-control" placeholder="确认密码" style="width: 310px;">
+						</div>
+					</div>
+					<div class="form-group">
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+						<label for="lastname" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo3.png" width="25" height="30"></label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input id="code" name="code" type="text" class="form-control"
+									placeholder="验证码" autocomplete="off" style="width: 240px;">
+								<button class="btn btn-default" type="button">验证码</button>
+							</div>
+						</div>
+					</div>
 				</form>
-            </div>
-            <div class="modal-footer">   
-                <a type="button" class="btn btn-primary" href="message.jsp">注册</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a type="button" class="btn btn-default" href="index.jsp">取消</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
-        </div>
-    </div>
+			</div>
+			<div class="modal-footer">
+				<a type="button" class="btn btn-primary" onclick="validate()">注册</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				<a type="button" class="btn btn-default" href="<%=indexPath%>index">返回</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

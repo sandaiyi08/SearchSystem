@@ -181,10 +181,13 @@
 							<div class="input-group">
 								<a href="<%=userPath %>login" class="btn btn-default" type="button" onclick="userbtn()">
 									登录</a> &nbsp;&nbsp;
-								<a href="<%=managePath %>index" class="btn btn-default" type="button" onclick="adminbtn()">
-								        管理 </a>&nbsp;&nbsp;
 								<a href="<%=userPath %>register" class="btn btn-default" type="button" onclick="userbtn()">
-                                                                        注册</a>
+                                                                        注册</a>&nbsp;&nbsp;
+                                <a href="<%=policePath %>login" class="btn btn-default" type="button" onclick="adminbtn()">
+                                                                        警察</a>&nbsp;&nbsp;
+								<a href="<%=managePath %>login" class="btn btn-default" type="button" onclick="adminbtn()">
+								        管理 </a>&nbsp;&nbsp;
+								
 							</div>
 						</form>
 						<button type="submit" class="btn btn-default" data-toggle="modal"

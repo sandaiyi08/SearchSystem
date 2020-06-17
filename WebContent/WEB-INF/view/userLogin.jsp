@@ -11,6 +11,7 @@
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
     session.setAttribute("indexPath", basePath);
+    session.setAttribute("userPath", basePath+"mlxt/user/");
 %>
 <!DOCTYPE html>
 <html>
@@ -23,8 +24,11 @@
 <script type="text/javascript" src="<%=basePath%>plug-in/bootstrap-3.3.7/js/bootstrap.js"></script>
 
 <script type="text/javascript">
+
+    var code = 1111;
+
 	function startload(){
-		var thiswidth = document.documentElement.clientWidth;
+		/* var thiswidth = document.documentElement.clientWidth;
 		var thisheignt = document.documentElement.clientHeight;
 		var loginform = document.getElementById("loginform");
 		var passworddiv = document.getElementById("passworddiv");
@@ -56,21 +60,47 @@
 		codetext.style.width = formwidth+"px";
 		
 		passwordtext.style.height = textheight+"px";
-		passwordtext.style.width = formwidth+"px";
+		passwordtext.style.width = formwidth+"px"; */
 		
-		if("${student}" == null && "${teacher}" == null){
-			alert("您还未登录，请登录！");
-		}else if("${msg}" != null && "${msg}" != ""){
-			alert("${msg}");
-		}
-	}
-	/*回车事件*/
+		if("${user}" == null && "${police}" == null){
+            alert("您还未登录，请登录！");
+        }else if("${msg}" != null && "${msg}" != ""){
+            alert("${msg}");
+        }
+	};
+	
 	function EnterPress(e){ //传入 event 
-		var e = e || window.event;
-		if(e.keyCode == 13){
-			$("#loginform").attr("action", "<%=userPath %>login").submit();
-		}
-	}
+        var e = e || window.event;
+        if(e.keyCode == 13){
+            validate();
+        }
+    };
+    
+    function validate() {
+        var tel = document.getElementById("tel").value;
+        var password = document.getElementById("password").value;
+        
+        if (password == null || password == '') {
+            alert("密码不能为空！");
+            return false;
+        } else if (tel == null || tel == '') {
+            alert("账号不能为空！");
+            return false;
+        } else {
+        	userLogin();
+        }
+    };
+    
+    function userLogin() {
+    	$("#userLoginForm").attr("action", "<%=userPath %>login.do").submit();
+    };
+    
+    function clearFormData(){
+        $("#userLoginForm #tel").val("");
+        $("#userLoginForm #password").val("");
+        $("#userLoginForm #code").val("");
+    };
+    
 </script>
 
 <style type="text/css">
@@ -97,43 +127,51 @@
 </style>
 </head>
 
-
-<body style=" background: url(plug-in/system/images/face1.jpg) no-repeat center center fixed; background-size: 100%;">
-    <div class="modal-dialog" style="margin-top: 10%;width: 500px; height:500px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-center" id="myModalLabel">登&nbsp;&nbsp;&nbsp;&nbsp;录</h4>
-            </div>
-            <div class="modal-body" id = "model-body" style="height: 220px">
-            	<form class="form-horizontal" role="form">
-					  <div class="form-group" >
-						  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-						  <label for="firstname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo1.png" width="30" height="30"></label>
-						  <div class="col-sm-10">
-						     <input type="text" class="form-control" id="firstname" placeholder="用户名 " style="width: 310px; height:40px;">
-						  </div>
-					  </div>
-					  <div class="form-group">
-					  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-					    <label for="lastname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo2.png" width="35" height="35"></label>
-					    <div class="col-sm-10">
-						    <div class="input-group">
-								<input  id="password" name="password" type="text" class="form-control" placeholder="密码" autocomplete="off" style="width: 240px;height:40px;">
-								<button class="btn btn-default" type="button" style="height:40px">验证码</button>	
-							</div>		
-					    </div>
-					  </div>
-				</form>  
-            </div>
-            <div class="modal-footer">   
-            	<a type="button" class="btn btn-primary" href ="userMes.jsp" >登录</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a type="button" class="btn btn-default" href ="register.jsp">注册</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
-        </div>
-    </div>
- 
+<body
+	style="background: url(plug-in/system/images/face1.jpg) no-repeat center center fixed; background-size: 100%;" 
+	onkeydown="EnterPress()">
+	<div class="modal-dialog"
+		style="margin-top: 10%; width: 500px; height: 500px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-center" id="myModalLabel">登&nbsp;&nbsp;&nbsp;&nbsp;录</h4>
+			</div>
+			<div class="modal-body" id="model-body" style="height: 220px">
+				<form class="form-horizontal" role="form" id="userLoginForm">
+					<div class="form-group">
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+						<label for="firstname" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo1.png" width="30" height="30"></label>
+						<div class="col-sm-10">
+							<input id="tel" name="tel" type="text" class="form-control"
+								placeholder="用户名 " style="width: 310px; height: 40px;">
+						</div>
+					</div>
+					<div class="form-group">
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+						<label for="lastname" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo2.png" width="35" height="35"></label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input id="password" name="password" type="text"
+									class="form-control" placeholder="密码" autocomplete="off"
+									style="width: 240px; height: 40px;">
+								<button class="btn btn-default" type="button"
+									style="height: 40px">验证码</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a type="button" class="btn btn-primary" onclick="validate()">登录</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				<a type="button"
+					class="btn btn-default" href="<%=userPath%>register">注册</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

@@ -42,7 +42,7 @@
     
     <update id="updateOldman" parameterType="com.mlxt.pojo.OldMan">
         update old_info
-        <set>
+        <trim prefix="set" suffixOverrides=",">
         <if test="name != null and name != ''">
             name = #{name},
         </if>
@@ -52,32 +52,38 @@
         <if test="img_path != null and img_path != ''">
             img_path = #{img_path},
         </if>
-        </set>
+        </trim>>
         where id = "#{id}"
     </update>
      
-    <update id="insertUser" parameterType="com.mlxt.pojo.User">
-      update user_info
-      <set>
-        <if test="tel != null and tel != ''">
-            tel = #{tel},
-        </if>
-        <if test="password != null and password != ''">
-            password = #{password},
-        </if>
-        </set>
-    </update>
+    <insert id="insertUser" parameterType="com.mlxt.pojo.User">
+        insert into user_info(
+            <if test="tel != null and tel != ''">
+                tel,
+            </if>
+            <if test="password != null and password != ''">
+                password
+            </if>
+        )value(
+            <if test="tel != null and tel != ''">
+                #{tel},
+            </if>
+            <if test="password != null and password != ''">
+                #{password}
+            </if>
+        )
+    </insert>
     
     <update id="updateFamily" parameterType="com.mlxt.pojo.Family">
         update fam_info
-        <set>
+        <trim prefix="set" suffixOverrides=",">
         <if test="fm_tel != null and fm_tel != ''">
             fm_tel = #{fm_tel},
         </if>
         <if test="fm_name != null and fm_name != ''">
             fm_name = #{fm_name},
         </if>
-        </set>
+        </trim>
     </update>
     
     <select id="selectFamilyList" parameterType="String" resultType="com.mlxt.pojo.Family">
