@@ -62,7 +62,7 @@
 		passwordtext.style.height = textheight+"px";
 		passwordtext.style.width = formwidth+"px"; */
 		
-		if("${user}" == null && "${police}" == null){
+		if("${user}" == null){
             alert("您还未登录，请登录！");
         }else if("${msg}" != null && "${msg}" != ""){
             alert("${msg}");

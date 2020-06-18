@@ -88,18 +88,17 @@
 	<div class="row" style="margin-right: 0px">
 		<div class="left" style="text-align: center; margin-top: 15px;">
 			<a href="#" class="list-group-item active" style="background-color: #3894FF;">信息显示</a>
-			<a href="#" class="list-group-item" data-src="policeMes.jsp">警察信息</a>
-			<a href="#" class="list-group-item" data-src="peopleMes.jsp">用户信息</a>
+			<a href="#" class="list-group-item" data-src="<%=managePath %>policeMessage">警察信息</a>
+			<a href="#" class="list-group-item" data-src="<%=managePath %>peopleMessage">用户信息</a>
 			<a href="#" class="list-group-item active" style="background-color:  #3894FF;">信息管理</a>
-			<a href="#" class="list-group-item" data-src="adminPolice.jsp">管理警察信息</a>
-			<a href="#" class="list-group-item" data-src="adminPeople.jsp">管理用户信息</a>
+			<a href="#" class="list-group-item" data-src="<%=managePath %>managePolice">管理警察信息</a>
+			<a href="#" class="list-group-item" data-src="<%=managePath %>manageUser">管理用户信息</a>
 		</div>
 		<div class="right">
 			<!-- 修改改改改改 -->
-            <iframe style="frameborder: 0; scrolling: no"
-				style="width: 98%; height: 100%; margin-top: 15px; margin-left: 10px; margin-right: auto;"
-				onload="Javascript:SetWinHeight(this)"
-				src="policeMes.jsp" id="policeMes">
+            <iframe
+				style="width: 98%; height: 100%; margin-top: 15px; margin-left: 10px; margin-right: auto; scolling: no; border-style: none;"
+				onload="Javascript:SetWinHeight(this)" src="<%=managePath %>policeMessage" id="policeMes">
 			</iframe>
 		</div>
 	</div>		

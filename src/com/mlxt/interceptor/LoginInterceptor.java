@@ -5,7 +5,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 /**
  * Filename: LoginInterceptor.java
  * 
- * ¡¤µÇÂ¼À¹½ØÀà
+ * ¡¤µÇÂ¼À¹½ØÆ÷
  * 
  * @author Luor
  * @version 1.0

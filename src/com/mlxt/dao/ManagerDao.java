@@ -16,6 +16,13 @@ import com.mlxt.pojo.Manager;
 
 @Repository
 public interface ManagerDao {
-	// 查找管理员
+	
+	/**
+	 * ·查找管理员
+	 * @param account
+	 * @param password
+	 * @return
+	 */
 	public Manager findManager(@Param("account")String account,@Param("password")String password);
+	
 }

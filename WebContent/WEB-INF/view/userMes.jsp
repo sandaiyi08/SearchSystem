@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>在线测试系统</title>
+<title>用户信息</title>
 <link rel="shortcut icon" href="<%=basePath%>plug-in/system/images/favicon.ico">
 <link href="<%=basePath%>plug-in/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <script src="<%=basePath%>plug-in/jquery-3.4.1/jquery-3.4.1.js"></script>
@@ -82,9 +82,9 @@
 			style="margin-left: 80px; margin-top: 9px; float: left; line-height: 50px; color: #ffffff; font-size: 30px;">麋&nbsp;&nbsp;鹿&nbsp;&nbsp;寻&nbsp;&nbsp;途&nbsp;&nbsp;系&nbsp;&nbsp;统</div>
 		<div
 			style="margin-right: 80px; margin-top: 9px; float: right; text-align: left; line-height: 50px;">
-			<a href="index.jsp" style="color: #ffffff">首页</a>&nbsp;&nbsp;&nbsp; <a
+			<a href="<%=basePath %>index.jsp" style="color: #ffffff">首页</a>&nbsp;&nbsp;&nbsp; <a
 				href="###" style="color: #ffffff">用户中心</a>&nbsp;&nbsp;&nbsp; <a
-				href="index.jsp" style="color: #ffffff">退出登录</a>
+				href="<%=userPath %>logout" style="color: #ffffff">退出登录</a>
 		</div>
 	</div>
 
@@ -92,19 +92,19 @@
 		<div class="left" style="text-align: center; margin-top: 15px;">
 			<a href="#" class="list-group-item active"
 				style="background-color: #3894FF;">信息显示</a> <a href="#"
-				class="list-group-item" data-src="oldMes.jsp">老人信息</a> <a href="#"
-				class="list-group-item" data-src="homeMes.jsp">成员信息</a> <a href="#"
+				class="list-group-item" data-src="<%=userPath %>oldManMes">老人信息</a> <a href="#"
+				class="list-group-item" data-src="<%=userPath %>familyMes">成员信息</a> <a href="#"
 				class="list-group-item active" style="background-color: #3894FF;">账户设置</a>
-			<a href="#" class="list-group-item" data-src="modifyOld.jsp">修改老人信息</a>
-			<a href="#" class="list-group-item" data-src="modifyHome.jsp">修改个人信息</a>
-			<a href="#" class="list-group-item" data-src="addHome.jsp">增添成员</a> <a
-				href="#" class="list-group-item" data-src="deleteHome.jsp">删除成员</a>
+			<a href="#" class="list-group-item" data-src="<%=userPath %>modifyOldMan">修改老人信息</a>
+			<a href="#" class="list-group-item" data-src="<%=userPath %>modifyFamily">修改个人信息</a>
+			<a href="#" class="list-group-item" data-src="<%=userPath %>addFamily">增添成员</a> <a
+				href="#" class="list-group-item" data-src="<%=userPath %>delFamily">删除成员</a>
 		</div>
 		<div class="right">
 			<!-- 修改改改改改 -->
-			<iframe style="frameborder: 0; scrolling: no"
-				style="width: 98%; height: 100%; margin-top: 15px; margin-left: 10px; margin-right: auto;"
-				onload="Javascript:SetWinHeight(this)" src="homeMes.jsp"
+			<iframe
+				style="width: 98%; height: 100%; margin-top: 15px; margin-left: 10px; margin-right: auto; scolling: no; border-style: none;"
+				onload="Javascript:SetWinHeight(this)" src="<%=userPath%>familyMes"
 				id="homeMes"></iframe>
 		</div>
 	</div>

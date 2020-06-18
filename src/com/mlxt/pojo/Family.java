@@ -13,7 +13,7 @@ import com.mlxt.common.utils.BasePojo;
 public class Family extends BasePojo {
 	private String familyTel;
 	private String familyName;
-	private String oldManId;
+	private Integer oldManId;
 	
 	/**
 	 * ¡¤¹¹Ôìº¯Êý
@@ -29,7 +29,7 @@ public class Family extends BasePojo {
 	 * @param familyName
 	 * @param oldManId
 	 */
-	public Family(String familyTel, String familyName, String oldManId) {
+	public Family(String familyTel, String familyName, Integer oldManId) {
 		this.familyTel = familyTel;
 		this.familyName = familyName;
 		this.oldManId = oldManId;
@@ -47,10 +47,10 @@ public class Family extends BasePojo {
 	public void setFamilyName(String familyName) {
 		this.familyName = familyName;
 	}
-	public String getOldManId() {
+	public Integer getOldManId() {
 		return oldManId;
 	}
-	public void setOldManId(String oldManId) {
+	public void setOldManId(Integer oldManId) {
 		this.oldManId = oldManId;
 	}
 

@@ -10,52 +10,6 @@
         </if>
     </select>
     
-    <insert id="insertOldman" parameterType="com.mlxt.pojo.OldMan">
-        insert into old_info(
-        <if test="id != null and id != ''">
-            id,
-        </if>
-        <if test="name != null and name != ''">
-            name,
-        </if>
-        <if test="address != null and address != ''">
-            address,
-        </if>
-        <if test="img_path != null and img_path != ''">
-            img_path
-        </if>
-        )value(
-        <if test="id != null and id != ''">
-            "#{id}",
-        </if>
-        <if test="name != null and name != ''">
-            "#{name}",
-        </if>
-        <if test="address != null and address != ''">
-            "#{address}",
-        </if>
-        <if test="img_path != null and img_path != ''">
-            "#{img_path}"
-        </if>
-        )       
-    </insert>
-    
-    <update id="updateOldman" parameterType="com.mlxt.pojo.OldMan">
-        update old_info
-        <trim prefix="set" suffixOverrides=",">
-        <if test="name != null and name != ''">
-            name = #{name},
-        </if>
-        <if test="address != null and address != ''">
-            address = #{address},
-        </if>
-        <if test="img_path != null and img_path != ''">
-            img_path = #{img_path},
-        </if>
-        </trim>>
-        where id = "#{id}"
-    </update>
-     
     <insert id="insertUser" parameterType="com.mlxt.pojo.User">
         insert into user_info(
             <if test="tel != null and tel != ''">
@@ -73,6 +27,70 @@
             </if>
         )
     </insert>
+    
+    <insert id="insertOldMan" parameterType="com.mlxt.pojo.OldMan">
+        insert into old_info(
+        <if test="name != null and name != ''">
+            name,
+        </if>
+        <if test="address != null and address != ''">
+            address,
+        </if>
+        <if test="imgPath != null and imgPath != ''">
+            img_path
+        </if>
+        )value(
+        <if test="name != null and name != ''">
+            #{name},
+        </if>
+        <if test="address != null and address != ''">
+            #{address},
+        </if>
+        <if test="imgPath != null and imgPath != ''">
+            #{imgPath}
+        </if>
+        )       
+    </insert>
+    
+    <insert id="insertFamily" parameterType="com.mlxt.pojo.Family">
+        insert into fam_info(
+        <if test="familyName != null and familyName != ''">
+            fm_name,
+        </if>
+        <if test="familyTel != null and familyTel != ''">
+            fm_tel,
+        </if>
+        <if test="oldManId != null and oldManId != ''">
+            om_id
+        </if>
+        )value(
+        <if test="familyName != null and familyName != ''">
+            #{familyName},
+        </if>
+        <if test="familyTel != null and familyTel != ''">
+            #{familyTel},
+        </if>
+        <if test="oldManId != null and oldManId != ''">
+            #{oldManId}
+        </if>
+        )       
+    </insert>
+    
+    <update id="updateOldMan" parameterType="com.mlxt.pojo.OldMan">
+        update old_info
+        <trim prefix="set" suffixOverrides=",">
+        <if test="name != null and name != ''">
+            name = #{name},
+        </if>
+        <if test="address != null and address != ''">
+            address = #{address},
+        </if>
+        <if test="img_path != null and img_path != ''">
+            img_path = #{img_path},
+        </if>
+        </trim>>
+        where id = "#{id}"
+    </update>
     
     <update id="updateFamily" parameterType="com.mlxt.pojo.Family">
         update fam_info
@@ -105,6 +123,37 @@
     
     <select id="selectAllUserList" resultType="com.mlxt.pojo.User">
         select * from user_info
+    </select>
+    
+    <select id="findOldManIdByOldMan" parameterType="com.mlxt.pojo.OldMan" resultType="Integer">
+        select id from old_info
+        <trim prefix="where" prefixOverrides="and">
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="address != null and address != ''">
+                and name = #{name}
+            </if>
+            <if test="imgPath != null and imgPath != ''">
+                and img_path = #{imgPath}
+            </if>
+        </trim>  
+    </select>
+    
+    <select id="findOldManIdByFamily" parameterType="com.mlxt.pojo.Family" resultType="Integer">
+        select om_id from fam_info
+        <trim prefix="where" prefixOverrides="and">
+            <if test="familyTel != null and familyTel != ''">
+                and fm_tel = #{familyTel}
+            </if>
+            <if test="familyName != null and familyName != ''">
+                and fm_name = #{familyName}
+            </if>
+        </trim>  
+    </select>
+    
+    <select id="findUserName" parameterType="String" resultType="String">
+        select fm_name from fam_info where fm_tel = #{familyTel}
     </select>
 
 </mapper>

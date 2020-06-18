@@ -24,54 +24,119 @@
 <script type="text/javascript" src="<%=basePath%>plug-in/bootstrap-3.3.7/js/bootstrap.js"></script>
 
 <script type="text/javascript">
+
 	function startload(){
-		var thiswidth = document.documentElement.clientWidth;
-		var thisheignt = document.documentElement.clientHeight;
-		var loginform = document.getElementById("loginform");
-		var passworddiv = document.getElementById("passworddiv");
-		var codetext = document.getElementById("codetext");
-		var passwordtext = document.getElementById("passwordtext");
-		var radioset = document.getElementById("radioset");
-		
-		var formwidth = 0.205*thiswidth;
-		var formheight = 0.18*thisheignt;
-		var textheight = 0.0745*thisheignt;
-		
-		loginform.style.position="absolute";
-		passworddiv.style.position="absolute";
-		passwordtext.style.position="absolute";
-		radioset.style.position="absolute";
-		
-		loginform.style.width = formwidth+"px";
-		loginform.style.height = formheight+"px";
-		
-		loginform.style.left = 0.4345*thiswidth+"px";
-		loginform.style.top = 0.4747*thisheignt+"px";
-		
-		radioset.style.marginLeft = 0.01*thiswidth+"px";
-		radioset.style.marginTop = 0.132*thisheignt+"px";
-		
-		passwordtext.style.marginTop = 0.179*formheight+"px";
-		
-		codetext.style.height = textheight+"px";
-		codetext.style.width = formwidth+"px";
-		
-		passwordtext.style.height = textheight+"px";
-		passwordtext.style.width = formwidth+"px";
-		
-		if("${student}" == null && "${teacher}" == null){
-			alert("您还未登录，请登录！");
-		}else if("${msg}" != null && "${msg}" != ""){
-			alert("${msg}");
-		}
+		/* var thiswidth = document.documentElement.clientWidth;
+        var thisheignt = document.documentElement.clientHeight;
+        var loginform = document.getElementById("loginform");
+        var passworddiv = document.getElementById("passworddiv");
+        var codetext = document.getElementById("codetext");
+        var passwordtext = document.getElementById("passwordtext");
+        var radioset = document.getElementById("radioset");
+        
+        var formwidth = 0.205*thiswidth;
+        var formheight = 0.18*thisheignt;
+        var textheight = 0.0745*thisheignt;
+        
+        loginform.style.position="absolute";
+        passworddiv.style.position="absolute";
+        passwordtext.style.position="absolute";
+        radioset.style.position="absolute";
+        
+        loginform.style.width = formwidth+"px";
+        loginform.style.height = formheight+"px";
+        
+        loginform.style.left = 0.4345*thiswidth+"px";
+        loginform.style.top = 0.4747*thisheignt+"px";
+        
+        radioset.style.marginLeft = 0.01*thiswidth+"px";
+        radioset.style.marginTop = 0.132*thisheignt+"px";
+        
+        passwordtext.style.marginTop = 0.179*formheight+"px";
+        
+        codetext.style.height = textheight+"px";
+        codetext.style.width = formwidth+"px";
+        
+        passwordtext.style.height = textheight+"px";
+        passwordtext.style.width = formwidth+"px"; */
+        
+		if("${user}" == null){
+            alert("您还未登录，请登录！");
+        }else if("${msg}" != null && "${msg}" != ""){
+            alert("${msg}");
+        }
 	}
-	/*回车事件*/
+	
 	function EnterPress(e){ //传入 event 
-		var e = e || window.event;
-		if(e.keyCode == 13){
-			$("#loginform").attr("action", "<%=userPath %>login").submit();
-		}
-	}
+        var e = e || window.event;
+        if(e.keyCode == 13){
+            validate();
+        }
+    };
+    
+    function validateOldMan() {
+        var name = document.getElementById("name").value;
+        var address = document.getElementById("address").value;
+        var imgPath = document.getElementById("imgPath").value;
+        var familyTel = document.getElementById("familyTel").value;
+        var familyName = document.getElementById("familyName").value;
+        
+        if (name == null || name == '') {
+            alert("姓名不能为空！");
+            return false;
+        } else if (address == null || address == '') {
+            alert("家庭住址不能为空！");
+            return false;
+        } else if (imgPath == null || imgPath == '') {
+            alert("老人图片不能为空！");
+            return false;
+        } else if (familyTel == null || familyTel == '') {
+            alert("家庭成员信息不能为空！");
+            return false;
+        } else if (familyName == null || familyName == '') {
+            alert("家庭成员信息不能为空！");
+            return false;
+        } else {
+        	oldManInfoCollect();
+        }
+    };
+    
+    function validateFamily() {
+        var familyTel = document.getElementById("familyTel").value;
+        var familyName = document.getElementById("familyName").value;
+        
+        if (familyTel == null || familyTel == '') {
+            alert("密码不能为空！");
+            return false;
+        } else if (familyName == null || familyName == '') {
+            alert("账号不能为空！");
+            return false;
+        } else {
+        	familyInfoCollect();
+        }
+    };
+    
+    function oldManInfoCollect() {
+    	$("#oldManInfoForm").attr("action", "<%=userPath %>collect.do").submit();
+    };
+    
+    function familyInfoCollect() {
+        $("#familyInfoForm").attr("action", "<%=userPath %>collectFamily.do").submit();
+    };
+    
+    function clearFamilyFormData(){
+        $("#familyInfoForm #familyTel").val("");
+        $("#familyInfoForm #familyName").val("");
+    };
+    
+    function clearFormData(){
+        $("#oldManInfoForm #name").val("");
+        $("#oldManInfoForm #address").val("");
+        $("#oldManInfoForm #imgPath").val("");
+        $("#oldManInfoForm #familyName").val("");
+        $("#oldManInfoForm #familyTel").val("");
+    };
+    
 </script>
 
 <style type="text/css">
@@ -99,60 +164,69 @@
 </head>
 
 
-<body style=" background: url(plug-in/system/images/face1.jpg) no-repeat center center fixed; background-size: 100%;">
-    <div class="modal-dialog" style="margin-top: 10%;width: 500px; height: 800px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-center" id="myModalLabel">采&nbsp;&nbsp;&nbsp;&nbsp;集</h4>
-            </div>
-            <div class="modal-body" id = "model-body" style="height: 300px">
-             	<form class="form-horizontal" role="form">
-				  <div class="form-group" >
-				    <label for="firstname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo4.png" width="30" height="30"></label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="firstname" placeholder="老人姓名" style="width: 310px;">
-				    </div>
-				  </div>
-				  <div class="form-group" >
-				    <label for="firstname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo8.png" width="30" height="30"></label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="firstname" placeholder="老人现住地址" style="width: 310px;">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="lastname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo6.png" width="25" height="30"></label>
-				    <div class="col-sm-10">
-				      	<div class="input-group">
-   							 <input type="file" id="inputfile">
-						</div>		
-				    </div>
-				  </div>
-				  <div class="form-group" >
-				    <label for="firstname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo5.png" width="30" height="30"></label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="firstname" placeholder="姓名" style="width: 310px;">
-				    </div>
-				  </div>
-				  <div class="form-group" >
-				    <label for="firstname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo7.png" width="30" height="30"></label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="firstname" placeholder="联系方式" style="width: 310px;">
-				    </div>
-				  </div>
-				</form>   
-            </div>
-            <div class="modal-footer">   
-                 <a type="submit" class="btn btn-primary" data-toggle="modal"
-					data-target="#regist">完成</a>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <a type="button" class="btn btn-default" href="userMes.jsp" data-dismiss="modal">取消</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           	</div>
-        </div>
-    </div>
- 	<!-- 模态框（Modal） -->
+<body
+	style="background: url(plug-in/system/images/face1.jpg) no-repeat center center fixed; background-size: 100%;"
+	onload="startload()"  onkeydown="EnterPress()">
+	<div class="modal-dialog"
+		style="margin-top: 10%; width: 500px; height: 800px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-center" id="myModalLabel">采&nbsp;&nbsp;&nbsp;&nbsp;集</h4>
+			</div>
+			<div class="modal-body" id="model-body" style="height: 300px">
+				<form id="oldManInfoForm" class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo4.png" width="30" height="30"></label>
+						<div class="col-sm-10">
+							<input id="name" name="name" type="text" class="form-control"
+								placeholder="老人姓名" style="width: 310px;">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="address" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo8.png" width="30" height="30"></label>
+						<div class="col-sm-10">
+							<input id="address" name="address" type="text" class="form-control"
+								placeholder="老人现住地址" style="width: 310px;">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="imgPath" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo6.png" width="25" height="30"></label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input id="imgPath" name="imgPath" type="file">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="familyName" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo5.png" width="30" height="30"></label>
+						<div class="col-sm-10">
+							<input id="familyName" name="familyName" type="text" class="form-control"
+								placeholder="姓名" style="width: 310px;">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="familyTel" class="col-sm-2 control-label"><img
+							src="plug-in/system/images/demo7.png" width="30" height="30"></label>
+						<div class="col-sm-10">
+							<input id="familyTel" name="familyTel" type="text" class="form-control"
+								placeholder="联系方式" style="width: 310px;">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a type="submit" class="btn btn-primary" data-toggle="modal"
+					data-target="#regist" onclick="validateOldMan()">完成</a>
+			</div>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
 	<div class="modal fade" id="regist" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true" >
+		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -161,26 +235,30 @@
 					<h4 class="modal-title" id="myModalLabel">继续采集</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" role="form" id="">
-				  		<div class="form-group" >
-						    <label for="firstname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo5.png" width="30" height="30"></label>
-						    <div class="col-sm-10">
-						      <input type="text" class="form-control" id="firstname" placeholder="姓名" style="width: 310px;">
-						    </div>
+					<form id="familyInfoForm" class="form-horizontal" role="form" id="">
+						<div class="form-group">
+							<label for="familyName" class="col-sm-2 control-label"><img
+								src="plug-in/system/images/demo5.png" width="30" height="30"></label>
+							<div class="col-sm-10">
+								<input id="familyName" name="familyName" type="text" class="form-control"
+									placeholder="姓名" style="width: 310px;">
+							</div>
 						</div>
-				  		<div class="form-group" >
-				  
-						    <label for="firstname" class="col-sm-2 control-label"><img src="plug-in/system/images/demo7.png" width="30" height="30"></label>
-						    <div class="col-sm-10">
-						      <input type="text" class="form-control" id="firstname" placeholder="联系方式" style="width: 310px;">
-						    </div>
-				 		</div>
+						<div class="form-group">
+
+							<label for="familyTel" class="col-sm-2 control-label"><img
+								src="plug-in/system/images/demo7.png" width="30" height="30"></label>
+							<div class="col-sm-10">
+								<input id="familyTel" name="familyTel" type="text" class="form-control"
+									placeholder="联系方式" style="width: 310px;">
+							</div>
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="Button1"
-						onClick="validate();">完成</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>	
+						onClick="validateFamily();">完成</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				</div>
 			</div>
 		</div>

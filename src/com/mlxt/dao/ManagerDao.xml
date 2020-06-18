@@ -6,7 +6,7 @@
 
     <select id="findManager" parameterType="String" resultType="com.mlxt.pojo.Manager">
         <if test="account != null and account != '' and password != null and password != ''">
-            select * from admin_info where account = '#{account}' and password = '#{password}'
+            select * from admin_info where account = #{account} and password = #{password}
         </if>
     </select>
     

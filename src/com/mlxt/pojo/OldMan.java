@@ -12,7 +12,7 @@ import com.mlxt.common.utils.BasePojo;
  */
 public class OldMan extends BasePojo {
 	private String address;
-	private String id;
+	private Integer id;
 	private String imgPath;
 	private String name;
 	
@@ -31,7 +31,7 @@ public class OldMan extends BasePojo {
 	 * @param imgPath
 	 * @param name
 	 */
-	public OldMan(String address, String id, String imgPath, String name) {
+	public OldMan(String address, Integer id, String imgPath, String name) {
 		this.address = address;
 		this.id = id;
 		this.imgPath = imgPath;
@@ -44,10 +44,10 @@ public class OldMan extends BasePojo {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getImgPath() {

@@ -13,6 +13,12 @@ import com.mlxt.pojo.Manager;
  * @version 1.0
  */
 public interface ManagerService {
-	// 查找管理员
+	
+	/**
+	 * ·查找管理员
+	 * @param account
+	 * @param password
+	 * @return
+	 */
 	public Manager findManager(@Param("account")String account,@Param("password")String password);
 }

@@ -18,8 +18,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mlxt")
 public class SystemController {
 	
+	/**
+	 * ·主页
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/index")
 	public String systemIndex(HttpSession session) {
-		return "index";
+		return "systemIndex";
+	}
+	
+	/**
+	 * ·关于我们
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/about")
+	public String systemAbout(HttpSession session) {
+		return "about";
 	}
 }

@@ -37,13 +37,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Integer insertOldman(OldMan oldman) {
-		return this.userDao.insertOldman(oldman);
+	public Integer insertOldMan(OldMan oldMan) {
+		return this.userDao.insertOldMan(oldMan);
+	}
+	
+	@Override
+	public Integer insertFamily(Family family) {
+		return this.userDao.insertFamily(family);
 	}
 
 	@Override
-	public Integer updateOldman(OldMan oldman) {
-		return this.userDao.updateOldman(oldman);
+	public Integer updateOldMan(OldMan oldMan) {
+		return this.userDao.updateOldMan(oldMan);
 	}
 
 	@Override
@@ -59,6 +64,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> selectAllUserList() {
 		return this.userDao.selectAllUserList();
+	}
+
+	@Override
+	public Integer findOldManIdByOldMan(OldMan oldMan) {
+		return this.userDao.findOldManIdByOldMan(oldMan);
+	}
+
+	@Override
+	public Integer findOldManIdByFamily(Family family) {
+		return this.userDao.findOldManIdByFamily(family);
+	}
+
+	@Override
+	public String findUserName(String familyTel) {
+		return this.userDao.findUserName(familyTel);
 	}
 
 }
