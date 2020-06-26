@@ -10,4 +10,94 @@
         </if>
     </select>
     
+    <select id="findUserCount" parameterType="com.mlxt.pojo.User" resultType="Integer">
+        select count(*) from user_info a,fam_info b
+        <include refid="selectUserWhere"></include>
+    </select>
+    
+    <select id="findUserList" parameterType="com.mlxt.pojo.User" resultType="com.mlxt.pojo.User">
+        select
+        a.tel as tel,
+        b.fm_name as name,
+        a.password as password
+        from user_info a,fam_info b
+        <include refid="selectUserWhere"></include>
+    </select>
+    
+    <sql id="selectUserWhere">
+        <trim prefix="where" prefixOverrides="and">
+            and a.tel = b.fm_tel
+            <if test="tel != null and tel != ''">
+                and a.tel like "%${tel}%"
+            </if>
+            <if test="name != null and name != ''">
+                and b.fm_name like "%${name}%"
+            </if>
+        </trim>
+    </sql>
+    
+    <select id="findPoliceCount" parameterType="com.mlxt.pojo.Policeman" resultType="Integer">
+        select count(*) from police_info
+        <include refid="selectPoliceWhere"></include>
+    </select>
+    
+    <select id="findPoliceList" parameterType="com.mlxt.pojo.Policeman" resultType="com.mlxt.pojo.Policeman">
+        select * from police_info
+        <include refid="selectPoliceWhere"></include>
+    </select>
+    
+    <sql id="selectPoliceWhere">
+        <trim prefix="where" prefixOverrides="and">
+            <if test="account != null and account != ''">
+                and account like "%${account}%"
+            </if>
+        </trim>
+    </sql>
+
+    <insert id="insertPoliceman" parameterType="com.mlxt.pojo.Policeman">
+        insert into police_info(
+        <if test="account != null and account != ''">
+            account,
+        </if>
+        <if test="password != null and password != ''">
+            password
+        </if>
+        )value(
+        <if test="account != null and account != ''">
+            #{account},
+        </if>
+        <if test="password != null and password != ''">
+            #{password}
+        </if>
+        )
+    </insert>
+    
+    <delete id="deletePolice" parameterType="String">
+        <if test="account != null and account != ''">
+            delete from police_info where account = #{account}
+        </if>
+    </delete>
+    
+    <update id="updateUser" parameterType="com.mlxt.pojo.User">
+        update user_info a, fam_info b
+        <trim prefix="set" suffixOverrides=",">
+        <if test="telModify != null and telModify != ''">
+            a.tel = #{telModify},
+            b.fm_tel = #{telModify},
+        </if>
+        <if test="name != null and name != ''">
+            b.fm_name = #{name},
+        </if>
+        <if test="password != null and password != ''">
+            password = #{password},
+        </if>
+        </trim>
+        <trim prefix="where" prefixOverrides="and">
+            and a.tel = b.fm_tel
+        <if test="tel != null and tel != ''">
+            and a.tel = #{tel}
+        </if>
+        </trim>
+    </update>
+    
 </mapper>

@@ -1,15 +1,26 @@
 package com.mlxt.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
+import com.mlxt.pojo.Image;
+import com.mlxt.pojo.OldMan;
 import com.mlxt.pojo.Policeman;
 import com.mlxt.service.PolicemanService;
 
@@ -29,6 +40,7 @@ public class PolicemanController {
 	@Autowired
 	private PolicemanService policemanService;
 	
+	private Process process;
 	private String indexPath;
 	private String policePath;
 	
@@ -66,7 +78,7 @@ public class PolicemanController {
 			return "policeLogin";
 		}
 		if (policeman != null) {
-			session.setAttribute("Police_SESSION", policeman);
+			session.setAttribute("POLICE_SESSION", policeman);
 			modelMap.addFlashAttribute("police", policeman);
 			return "redirect:" + policePath + "find";
 		}
@@ -85,7 +97,7 @@ public class PolicemanController {
 		indexPath = (String) session.getAttribute("indexPath");
 		session.invalidate();
 		modelMap.clear();
-		return "redirect:" + indexPath + "index.jsp";
+		return "redirect:" + indexPath + "index";
 	}
 	
 	/**
@@ -94,19 +106,90 @@ public class PolicemanController {
 	 * @return
 	 */
 	@RequestMapping("/find")
-	public String policeFind(HttpSession session) {
+	public String policeFindPage(HttpSession session) {
 		indexPath = (String) session.getAttribute("indexPath");
 		return "findOldMan";
 	}
 	
+	@RequestMapping("/find.do")
+	@ResponseBody
+	public String policeFind(Model model, RedirectAttributesModelMap modelMap, HttpSession session, 
+			@RequestParam("imgFile")CommonsMultipartFile imgFile) {
+		indexPath = (String) session.getAttribute("indexPath");
+		List<Image> imgList = this.policemanService.findImageList();
+		Integer oldManId = -1;
+		
+		// Create imgPath
+		if (imgFile != null) {
+			// Path
+			String suffixName = FilenameUtils.getExtension(imgFile.getOriginalFilename());
+			String imgName = "checked." + suffixName;
+			String pyFilePath = session.getServletContext().getRealPath("/plug-in/");
+			String imgfilePath = session.getServletContext().getRealPath("/plug-in/person-data/checked/");
+
+			File file = new File(imgfilePath, imgName);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			try {
+				imgFile.transferTo(file);
+			} catch (Exception e) {
+				model.addAttribute("msg", "上传图片失败！");
+				return "Fail";
+			}
+
+			// Python
+			String faceLocation = "";
+			try {
+				String pyCommandEncoding = "python " + pyFilePath + "saveFace.py " + imgfilePath + imgName;
+				process = Runtime.getRuntime().exec(pyCommandEncoding);
+				BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				faceLocation = in.readLine();
+				// System.out.println(faceLocation);
+				if (faceLocation == null || faceLocation == "") {
+					model.addAttribute("msg", "图片错误，未检测到人脸！");
+					return "Fail";
+				}
+				faceLocation = faceLocation.replaceAll("\\s*", "");
+				String result = "";
+				String pyCommandCompare = "python " + pyFilePath + "faceCheck.py " + imgfilePath + imgName + " " + faceLocation + " ";
+				for (Image img:imgList) {
+					process = Runtime.getRuntime().exec(pyCommandCompare + img.getImgPath() + " " + img.getImgLocation());
+					in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+					result = in.readLine();
+					if (result.equalsIgnoreCase("OK")) {
+						oldManId = img.getId();
+						break;
+					}
+				}
+				in.close();
+				process.waitFor();
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("msg", "上传图片失败！");
+				return "Fail";
+			}
+		}
+		if (oldManId != -1) {
+			OldMan oldMan =  (OldMan) this.policemanService.findOldmanById(oldManId);
+			session.setAttribute("OLDMAN_SESSON", oldMan);
+			return "OK";
+		}
+		model.addAttribute("msg", "系统错误！");
+		return "Fail";
+	}
+	
 	/**
 	 * ·返回查询结果界面
+	 * @param model
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/findResult")
-	public String policeResult(HttpSession session) {
+	public String policeResultPage(Model model, HttpSession session) {
 		indexPath = (String) session.getAttribute("indexPath");
+		OldMan oldMan = (OldMan) session.getAttribute("OLDMAN_SESSON");
+		model.addAttribute("oldMan", oldMan);
 		return "findOldManInfo";
 	}
 	

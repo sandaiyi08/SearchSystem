@@ -10,7 +10,7 @@
     String policePath = path+"/mlxt/police/";
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
-    session.setAttribute("indexPath", basePath);
+    session.setAttribute("indexPath", indexPath);
     session.setAttribute("userPath", basePath+"mlxt/user/");
 %>
 <!DOCTYPE html>
@@ -64,48 +64,58 @@
 </style>
 
 <script type="text/javascript" >
-	$(function(){
-		$(".left a").on("click",function(){
-			var address =$(this).attr("data-src");
-			$("iframe").attr("src",address);
+
+	function startload() {
+		if ("${user}" == null) {
+			alert("您还未登录，请登录！");
+		} else if ("${msg}" != null && "${msg}" != "") {
+			alert("${msg}");
+		}
+	};
+
+	$(function() {
+		$(".left a").on("click", function() {
+			var address = $(this).attr("data-src");
+			$("iframe").attr("src", address);
 		});
 	});
 	function SetWinHeight(obj) {
-        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';   
-    }
+		obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+	}
 </script>
 
 </head>
-<body>
+<body onload="startload()">
 	<div class="header" style="background-color: #46A3FF; height: 100px">
 		<div
-			style="margin-left: 80px; margin-top: 9px; float: left; line-height: 50px; color: #ffffff; font-size: 30px;">麋&nbsp;&nbsp;鹿&nbsp;&nbsp;寻&nbsp;&nbsp;途&nbsp;&nbsp;系&nbsp;&nbsp;统</div>
+			style="margin-left: 80px; margin-top: 9px; float: left; line-height: 50px; color: #ffffff; font-size: 30px;">
+			麋&nbsp;&nbsp;鹿&nbsp;&nbsp;寻&nbsp;&nbsp;途&nbsp;&nbsp;系&nbsp;&nbsp;统
+		</div>
 		<div
 			style="margin-right: 80px; margin-top: 9px; float: right; text-align: left; line-height: 50px;">
-			<a href="<%=basePath %>index.jsp" style="color: #ffffff">首页</a>&nbsp;&nbsp;&nbsp; <a
-				href="###" style="color: #ffffff">用户中心</a>&nbsp;&nbsp;&nbsp; <a
-				href="<%=userPath %>logout" style="color: #ffffff">退出登录</a>
+			<a href="<%=basePath %>index.jsp" style="color: #ffffff">首页</a>&nbsp;&nbsp;&nbsp;
+            <a href="" style="color: #ffffff">用户中心</a>&nbsp;&nbsp;&nbsp;
+            <a href="<%=userPath %>logout" style="color: #ffffff">退出登录</a>
 		</div>
 	</div>
 
 	<div class="row" style="margin-right: 0px">
 		<div class="left" style="text-align: center; margin-top: 15px;">
-			<a href="#" class="list-group-item active"
-				style="background-color: #3894FF;">信息显示</a> <a href="#"
-				class="list-group-item" data-src="<%=userPath %>oldManMes">老人信息</a> <a href="#"
-				class="list-group-item" data-src="<%=userPath %>familyMes">成员信息</a> <a href="#"
-				class="list-group-item active" style="background-color: #3894FF;">账户设置</a>
-			<a href="#" class="list-group-item" data-src="<%=userPath %>modifyOldMan">修改老人信息</a>
-			<a href="#" class="list-group-item" data-src="<%=userPath %>modifyFamily">修改个人信息</a>
-			<a href="#" class="list-group-item" data-src="<%=userPath %>addFamily">增添成员</a> <a
-				href="#" class="list-group-item" data-src="<%=userPath %>delFamily">删除成员</a>
+			<a class="list-group-item active" style="background-color: #3894FF;">信息显示</a>
+			<a class="list-group-item" data-src="<%=userPath %>oldManMes">老人信息</a>
+			<a class="list-group-item" data-src="<%=userPath %>familyMes">成员信息</a>
+			<a class="list-group-item active" style="background-color: #3894FF;">账户设置</a>
+			<a class="list-group-item" data-src="<%=userPath %>modifyOldMan">修改老人信息</a>
+			<a class="list-group-item" data-src="<%=userPath %>modifyUser">修改个人信息</a>
+			<a class="list-group-item" data-src="<%=userPath %>addFamily">增添成员</a>
+            <a class="list-group-item" data-src="<%=userPath %>delFamily">删除成员</a>
 		</div>
 		<div class="right">
 			<!-- 修改改改改改 -->
 			<iframe
 				style="width: 98%; height: 100%; margin-top: 15px; margin-left: 10px; margin-right: auto; scolling: no; border-style: none;"
 				onload="Javascript:SetWinHeight(this)" src="<%=userPath%>familyMes"
-				id="homeMes"></iframe>
+				id="familyMes"></iframe>
 		</div>
 	</div>
 </body>

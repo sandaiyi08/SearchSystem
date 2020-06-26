@@ -1,3 +1,5 @@
+<%@page import="org.springframework.ui.ModelMap"%>
+<%@page import="com.mlxt.pojo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -10,7 +12,7 @@
     String policePath = path+"/mlxt/police/";
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
-    session.setAttribute("indexPath", basePath);
+    session.setAttribute("indexPath", indexPath);
     session.setAttribute("userPath", basePath+"mlxt/user/");
 %>
 <!DOCTYPE html>
@@ -31,14 +33,14 @@
 	    </div>
 	    <div class="container">
 			    <div class="col-sm-4">
-			      	<div style="margin-left: 50px; margin-top: 30px; font-size: 16px;" >             
-			      		<img src="plug-in/system/images/face4.gif" class="img-responsive" alt="Cinque Terre" width="304" height="236"> 
+			      	<div style="margin-left: 50px; margin-top: 30px; font-size: 16px;" >
+			      		<img src="${oldMan.imgPath}" class="img-responsive" alt="Cinque Terre" width="304" height="236"> 
 				  	</div>
 			    </div>
 		    	<div class="col-sm-6" >
-		    		<div style="margin-left: 40px; margin-top: 80px; font-size: 16px;" >             
-			      		<h3>姓名：</h3><br>
-			      		<h3>现住地址：</h3><br> 
+		    		<div style="margin-left: 40px; margin-top: 80px; font-size: 16px;" >
+			      		<h3>姓名：${oldMan.name}</h3><br>
+			      		<h3>现住地址：${oldMan.address}</h3><br>
 				  	</div>
 			      	
 			    </div>

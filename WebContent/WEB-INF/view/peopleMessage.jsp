@@ -10,13 +10,14 @@
     String policePath = path+"/mlxt/police/";
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
-    session.setAttribute("indexPath", basePath);
+    session.setAttribute("indexPath", indexPath);
+    session.setAttribute("managePath", basePath+"mlxt/manage/");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>个人信息</title>
+<title>用户信息</title>
 <link rel="shortcut icon" href="<%=basePath%>plug-in/system/images/favicon.ico">
 <link href="<%=basePath%>plug-in/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <script src="<%=basePath%>plug-in/jquery-3.4.1/jquery-3.4.1.js"></script>
@@ -32,15 +33,17 @@
 		    <table class="table table-striped" style=" margin-top: 15px;">
 				<thead>
 					<tr>
-						<th>登录账号</th>
-						<th>使用密码</th>
+					    <th>用户姓名</th>
+						<th>用户电话</th>
+						<th>用户密码</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${testPaperList2}">
+					<c:forEach var="user" items="${page.rows}">
 					<tr>
-						<td>${item.code}</td>
-						<td>${item.name}</td>
+					    <td>${user.name}</td>
+						<td>${user.tel}</td>
+						<td>${user.password}</td>
 					</tr>
 					</c:forEach>
 				</tbody>

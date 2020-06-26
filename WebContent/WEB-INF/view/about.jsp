@@ -10,7 +10,7 @@
     String policePath = path+"/mlxt/police/";
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
-    session.setAttribute("indexPath", basePath);
+    session.setAttribute("indexPath", indexPath);
 %>
 <!DOCTYPE html>
 <html>
@@ -74,16 +74,40 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="index.jsp" style="color: #ffffff">首页</a>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="policeLogin.jsp" style="color: #ffffff">警务服务</a>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="login.jsp" style="color: #ffffff">用户中心</a>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="about.jsp" style="color:#ffffff">关于我们</a>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="login.jsp" style="color:#ffffff">登录</a>
-							<a href="register.jsp" style="color:#ffffff">|注册</a>
+						
+						<c:if test="${empty police && empty user}">
+                            <a href="<%=indexPath %>index" style="color: #ffffff">首页</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=policePath %>login" style="color: #ffffff">警务服务</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=userPath %>login" style="color: #ffffff">用户服务</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=indexPath %>about" style="color: #ffffff">关于我们</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=userPath %>login" style="color: #ffffff">登录</a>
+                            <a href="<%=userPath %>register" style="color: #ffffff">|注册</a>
+                        </c:if>
+                        <c:if test="${!empty police && empty user}">
+                            <a href="<%=indexPath %>index" style="color: #ffffff">首页</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=policePath %>find" style="color: #ffffff">警务服务</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=policePath %>message" style="color: #ffffff">个人中心</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=indexPath %>about" style="color: #ffffff">关于我们</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=policePath %>logout" style="color: #ffffff">登出</a>
+                        </c:if>
+                        <c:if test="${empty police && !empty user}">
+                            <a href="<%=indexPath %>index" style="color: #ffffff">首页</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=userPath %>message" style="color: #ffffff">用户服务</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=indexPath %>about" style="color: #ffffff">关于我们</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%=userPath %>logout" style="color: #ffffff">登出</a>
+                        </c:if>
+						
 						</div>
 					</div>
 				
@@ -99,7 +123,7 @@
 			</div>
 			<div class="col-md-4" style="margin-top: 20px; width: 200px">
 				<div style="height: 300px;margin-left: 28px; ">
-					<img src="plug-in/system/images/pic1.png"
+					<img src="<%=basePath%>plug-in/system/images/pic1.png"
 						style="height: 250px; width: 450px">
 				</div>
 			</div>
@@ -109,7 +133,7 @@
 			<div class="col-md-2"
 				style="margin-top: 10px; left: 20px; width: 400px">
 				<div style="height: 200px;">
-					<img src="plug-in/system/images/pic2.png"
+					<img src="<%=basePath%>plug-in/system/images/pic2.png"
 						style="height: 250px; width: 420px">
 				</div>
 			</div>
@@ -129,7 +153,7 @@
 			</div>
 			<div class="col-md-4" style="margin-top: 30px; width: 200px;margin-left: 20px;">
 				<div style="height: 300px;margin-left: 28px; ">
-					<img src="plug-in/system/images/pic3.png"
+					<img src="<%=basePath%>plug-in/system/images/pic3.png"
 						style="height: 250px; width: 400px">
 				</div>
 			</div>
@@ -144,9 +168,9 @@
 						style="font-size: 30px; color: #ffffff">麋&nbsp;&nbsp;鹿&nbsp;&nbsp;寻&nbsp;&nbsp;途&nbsp;&nbsp;系&nbsp;&nbsp;统</a>
 				</div>
 				<div class="container">
-					<a class="navbar-brand" href="#" style="font-size: 15px; color: #ffffff">地址：甘肃省兰州市西北师范大学</a>
-					<a class="navbar-brand" href="#" style="font-size: 15px; color: #ffffff">电话：XXXXXXXXXXX</a>
-					<a class="navbar-brand" href="#" style="font-size: 15px; color: #ffffff">邮箱：sandaiyi08@163.com</a>
+					<a class="navbar-brand" href="" style="font-size: 15px; color: #ffffff">地址：甘肃省兰州市西北师范大学</a>
+					<a class="navbar-brand" href="" style="font-size: 15px; color: #ffffff">电话：XXXXXXXXXXX</a>
+					<a class="navbar-brand" href="" style="font-size: 15px; color: #ffffff">邮箱：sandaiyi08@163.com</a>
 				</div>	
 			</div>
 		</div>

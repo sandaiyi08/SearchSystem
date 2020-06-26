@@ -10,7 +10,9 @@
     String policePath = path+"/mlxt/police/";
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
-    session.setAttribute("indexPath", basePath);
+    String savePath = basePath+"plug-in/person-data/";
+    session.setAttribute("savePath", savePath);
+    session.setAttribute("indexPath", indexPath);
     session.setAttribute("policePath", basePath+"mlxt/police/");
 %>
 <!DOCTYPE html>
@@ -117,14 +119,14 @@ div.transbox {
 </head>
 
 <body
-	style="background: url(plug-in/system/images/mes1.PNG) no-repeat center center fixed; background-size: cover;">
+	style="background: url(<%=basePath%>plug-in/system/images/mes1.PNG) no-repeat center center fixed; background-size: cover;">
 	<div class="header" style="height: 100px">
 		<div
 			style="margin-left: 80px; margin-top: 30px; float: left; line-height: 50px; color: #ffffff; font-size: 30px;">麋&nbsp;&nbsp;鹿&nbsp;&nbsp;寻&nbsp;&nbsp;途&nbsp;&nbsp;系&nbsp;&nbsp;统</div>
 		<div
 			style="margin-right: 80px; margin-top: 30px; float: right; text-align: left; line-height: 50px;">
-			<a href="<%=basePath%>index.jsp" style="color: #ffffff">首页</a>&nbsp;&nbsp;&nbsp;
-			<a href="###" style="color: #ffffff">用户中心</a>&nbsp;&nbsp;&nbsp; <a
+			<a href="<%=indexPath %>index" style="color: #ffffff">首页</a>&nbsp;&nbsp;&nbsp;
+			<a style="color: #ffffff">用户中心</a>&nbsp;&nbsp;&nbsp; <a
 				href="<%=policePath%>logout" style="color: #ffffff">退出登录</a>
 		</div>
 	</div>
@@ -137,9 +139,9 @@ div.transbox {
 			<div class="modal-body" id="model-body" style="height: 160px">
 				<div class="text-left" style="height: 100px; top: 0px;">
 					<br>
-					<p>姓名:</p>
+					<p>姓名:${oldMan.name}</p>
 					<br>
-					<p>住址:</p>
+					<p>住址:${oldMan.address}</p>
 				</div>
 				<div class="photo"></div>
 				<div class="div_hengline" style="width: 90%; top: 94%; left: 1px;">
@@ -149,9 +151,9 @@ div.transbox {
 							style="width: 80%; left: 1px; top: 50px;"></div>
 						<div class="text-left">
 							<br>
-							<p>姓名:</p>
+							<p>姓名:${oldMan.fmName}</p>
 							<br>
-							<p>联系方式:</p>
+							<p>联系方式:${oldMan.fmTel}</p>
 							<br>
 							<div class="div_hengline"
 								style="width: 100%; left: 1px; top: 150px;">

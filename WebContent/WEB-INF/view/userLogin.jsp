@@ -10,7 +10,7 @@
     String policePath = path+"/mlxt/police/";
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
-    session.setAttribute("indexPath", basePath);
+    session.setAttribute("indexPath", indexPath);
     session.setAttribute("userPath", basePath+"mlxt/user/");
 %>
 <!DOCTYPE html>
@@ -28,40 +28,6 @@
     var code = 1111;
 
 	function startload(){
-		/* var thiswidth = document.documentElement.clientWidth;
-		var thisheignt = document.documentElement.clientHeight;
-		var loginform = document.getElementById("loginform");
-		var passworddiv = document.getElementById("passworddiv");
-		var codetext = document.getElementById("codetext");
-		var passwordtext = document.getElementById("passwordtext");
-		var radioset = document.getElementById("radioset");
-		
-		var formwidth = 0.205*thiswidth;
-		var formheight = 0.18*thisheignt;
-		var textheight = 0.0745*thisheignt;
-		
-		loginform.style.position="absolute";
-		passworddiv.style.position="absolute";
-		passwordtext.style.position="absolute";
-		radioset.style.position="absolute";
-		
-		loginform.style.width = formwidth+"px";
-		loginform.style.height = formheight+"px";
-		
-		loginform.style.left = 0.4345*thiswidth+"px";
-		loginform.style.top = 0.4747*thisheignt+"px";
-		
-		radioset.style.marginLeft = 0.01*thiswidth+"px";
-		radioset.style.marginTop = 0.132*thisheignt+"px";
-		
-		passwordtext.style.marginTop = 0.179*formheight+"px";
-		
-		codetext.style.height = textheight+"px";
-		codetext.style.width = formwidth+"px";
-		
-		passwordtext.style.height = textheight+"px";
-		passwordtext.style.width = formwidth+"px"; */
-		
 		if("${user}" == null){
             alert("您还未登录，请登录！");
         }else if("${msg}" != null && "${msg}" != ""){
@@ -109,7 +75,7 @@
 		color: black;
 	}
 	.log_background{
-		background: url("<%=basePath%>plug-in/system/images/face1.jpg") no-repeat center center fixed;
+		background: url("<%=basePath%>plug-in/system/images/face.png") no-repeat center center fixed;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -128,8 +94,8 @@
 </head>
 
 <body
-	style="background: url(plug-in/system/images/face1.jpg) no-repeat center center fixed; background-size: 100%;" 
-	onkeydown="EnterPress()">
+	style="background: url(<%=basePath %>plug-in/system/images/face.png) no-repeat center center fixed; 
+	background-size: cover; z-index: -1; " onkeydown="EnterPress()">
 	<div class="modal-dialog"
 		style="margin-top: 10%; width: 500px; height: 500px">
 		<div class="modal-content">
@@ -140,8 +106,8 @@
 				<form class="form-horizontal" role="form" id="userLoginForm">
 					<div class="form-group">
 						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-						<label for="firstname" class="col-sm-2 control-label"><img
-							src="plug-in/system/images/demo1.png" width="30" height="30"></label>
+						<label for="tel" class="col-sm-2 control-label"><img
+							src="<%=basePath %>plug-in/system/images/demo1.png" width="30" height="30"></label>
 						<div class="col-sm-10">
 							<input id="tel" name="tel" type="text" class="form-control"
 								placeholder="用户名 " style="width: 310px; height: 40px;">
@@ -149,11 +115,11 @@
 					</div>
 					<div class="form-group">
 						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-						<label for="lastname" class="col-sm-2 control-label"><img
-							src="plug-in/system/images/demo2.png" width="35" height="35"></label>
+						<label for="password" class="col-sm-2 control-label"><img
+							src="<%=basePath %>plug-in/system/images/demo2.png" width="35" height="35"></label>
 						<div class="col-sm-10">
 							<div class="input-group">
-								<input id="password" name="password" type="text"
+								<input id="password" name="password" type="password"
 									class="form-control" placeholder="密码" autocomplete="off"
 									style="width: 240px; height: 40px;">
 								<button class="btn btn-default" type="button"

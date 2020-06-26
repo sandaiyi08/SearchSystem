@@ -11,7 +11,7 @@
 	String policePath = path+"/mlxt/police/";
 	String managePath = path+"/mlxt/manage/";
 	String systemPath = path+"/mlxt/";
-	session.setAttribute("indexPath", basePath);
+	session.setAttribute("indexPath", indexPath);
 %>
 <!DOCTYPE html>
 <html>
@@ -23,8 +23,6 @@
 <!-- 页面的宽度与设备屏幕的宽度一致  初始缩放比例 1:1 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="www.cnblogs.com/kemingli">
-<!-- 引入外部bootstrap的css文件(压缩版)，版本是3.3.7 -->
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -133,7 +131,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						
 						<c:if test="${empty police && empty user}">
-						    <a href="<%=basePath %>index.jsp" style="color: #ffffff">首页</a>
+						    <a href="<%=indexPath %>index" style="color: #ffffff">首页</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
 						    <a href="<%=policePath %>login" style="color: #ffffff">警务服务</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -142,10 +140,10 @@
                             <a href="<%=indexPath %>about" style="color: #ffffff">关于我们</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="<%=userPath %>login" style="color: #ffffff">登录</a>
-                            <a href="<%=userPath %>register" style="color: #ffffff">|注册</a>
+                            <a href="<%=userPath %>register" style="color: #ffffff">| 注册</a>
 					  	</c:if>
 					  	<c:if test="${!empty police && empty user}">
-					  	    <a href="<%=basePath %>index.jsp" style="color: #ffffff">首页</a>
+					  	    <a href="<%=indexPath %>index" style="color: #ffffff">首页</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="<%=policePath %>find" style="color: #ffffff">警务服务</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -156,7 +154,7 @@
                             <a href="<%=policePath %>logout" style="color: #ffffff">登出</a>
 					  	</c:if>
 					  	<c:if test="${empty police && !empty user}">
-                            <a href="<%=basePath %>index.jsp" style="color: #ffffff">首页</a>
+                            <a href="<%=indexPath %>index" style="color: #ffffff">首页</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="<%=userPath %>message" style="color: #ffffff">用户服务</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -231,13 +229,13 @@
 		</div>
 		<div class="col-md-4"
 			style="margin-top: 20px; width: 400px; text-align: center;">
-			<img src="plug-in/system/images/face4.gif" class="img-responsive">
+			<img src="<%=basePath%>plug-in/system/images/face4.gif" class="img-responsive">
 		</div>
 	</div>
 	<div class="container">
 		<div class="col-md-4"
 			style="margin-top: 20px; width: 400px; text-align: center;">
-			<img src="plug-in/system/images/face4.gif" class="img-responsive">
+			<img src="<%=basePath%>plug-in/system/images/face4.gif" class="img-responsive">
 		</div>
 		<div class="col-md-6">
 			<div style="height: 300px; margin-left: 40px; font-size: 20px;">

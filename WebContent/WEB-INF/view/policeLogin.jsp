@@ -10,7 +10,7 @@
     String policePath = path+"/mlxt/police/";
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
-    session.setAttribute("indexPath", basePath);
+    session.setAttribute("indexPath", indexPath);
     session.setAttribute("policePath", basePath+"mlxt/police/");
 %>
 <!DOCTYPE html>
@@ -60,7 +60,7 @@
         passwordtext.style.height = textheight+"px";
         passwordtext.style.width = formwidth+"px"; */
         
-        if("${user}" == null && "${police}" == null){
+        if("${police}" == null){
             alert("您还未登录，请登录！");
         }else if("${msg}" != null && "${msg}" != ""){
             alert("${msg}");
@@ -70,7 +70,7 @@
 	function EnterPress(e){ //传入 event 
         var e = e || window.event;
         if(e.keyCode == 13){
-            validate();
+        	validate();
         }
     };
     
@@ -106,7 +106,7 @@
 		color: black;
 	}
 	.log_background{
-		background: url("<%=basePath%>plug-in/system/images/face1.jpg") no-repeat center center fixed;
+		background: url("<%=basePath%>plug-in/system/images/face.png") no-repeat center center fixed;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -126,8 +126,8 @@
 
 
 <body
-	style="background: url(plug-in/system/images/face1.jpg) no-repeat center center fixed; background-size: 100%;"
-	onclick="EnterPress()">
+	style="background: url(<%=basePath %>plug-in/system/images/face.png) no-repeat center center fixed; background-size: 100%;"
+	onkeydown="EnterPress()">
 	<div class="modal-dialog"
 		style="margin-top: 10%; width: 500px; height: 500px">
 		<div class="modal-content">
@@ -139,7 +139,7 @@
 					<div class="form-group">
 						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
 						<label for="account" class="col-sm-2 control-label"><img
-							src="plug-in/system/images/demo1.png" width="30" height="30"></label>
+							src="<%=basePath %>plug-in/system/images/demo1.png" width="30" height="30"></label>
 						<div class="col-sm-10">
 							<input id="account" name="account" type="text" class="form-control"
 								placeholder="用户名 " style="width: 310px; height: 40px;">
@@ -148,10 +148,10 @@
 					<div class="form-group">
 						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
 						<label for="password" class="col-sm-2 control-label"><img
-							src="plug-in/system/images/demo2.png" width="35" height="35"></label>
+							src="<%=basePath %>plug-in/system/images/demo2.png" width="35" height="35"></label>
 						<div class="col-sm-10">
 							<div class="input-group">
-								<input id="password" name="password" type="text"
+								<input id="password" name="password" type="password"
 									class="form-control" placeholder="密码" autocomplete="off"
 									style="width: 310px; height: 40px;">
 							</div>
@@ -162,7 +162,7 @@
 			<div class="modal-footer">
 				<a type="button" class="btn btn-primary" onclick="validate()">登录</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a type="button"
-					class="btn btn-default" href="<%=basePath %>index.jsp">返回</a>
+					class="btn btn-default" href="<%=indexPath %>index">返回</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</div>
 		</div>

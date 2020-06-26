@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mlxt.common.utils.Page;
 import com.mlxt.dao.UserDao;
 import com.mlxt.pojo.Family;
 import com.mlxt.pojo.OldMan;
@@ -60,10 +61,10 @@ public class UserServiceImpl implements UserService {
 	public List<Family> selectFamilyList(String tel) {
 		return this.userDao.selectFamilyList(tel);
 	}
-
+	
 	@Override
-	public List<User> selectAllUserList() {
-		return this.userDao.selectAllUserList();
+	public Integer selectFamilyCount(String tel) {
+		return this.userDao.selectFamilyCount(tel);
 	}
 
 	@Override
@@ -75,10 +76,32 @@ public class UserServiceImpl implements UserService {
 	public Integer findOldManIdByFamily(Family family) {
 		return this.userDao.findOldManIdByFamily(family);
 	}
+	
+	@Override
+	public OldMan findOldMan(Integer oldManId) {
+		return this.userDao.findOldMan(oldManId);
+	}
 
 	@Override
 	public String findUserName(String familyTel) {
 		return this.userDao.findUserName(familyTel);
+	}
+	
+	@Override
+	public Integer delFamily(Family family) {
+		return this.userDao.delFamily(family);
+	}
+	
+	@Override
+	public Page<Family> selectFamilyPage(String tel, Family family, Integer page, Integer rows) {
+		family.setStartRow((page-1)*rows);
+		family.setRows(rows);
+		Page<Family> resultPage = new Page<Family>();
+		resultPage.setTotal(this.userDao.selectFamilyCount(tel));
+		resultPage.setRows(this.userDao.selectFamilyList(tel));
+		resultPage.setPage(page);
+		resultPage.setSize(rows);
+		return resultPage;
 	}
 
 }

@@ -10,49 +10,31 @@
         </if>
     </select>
     
-    <delete id="deletePolice" parameterType="String">
-        <if test="account != null and account != ''">
-            delete from police_info where account = #{account}
-        </if>
-    </delete>
-    
-    <select id="selectAllPolicemanList" resultType="com.mlxt.pojo.Policeman">
-        select account,password from police_info
-    </select>
-    
-    <select id="getPolicemanByAccount" parameterType="String" resultType="com.mlxt.pojo.Policeman">
-        <if test="account != null and account != ''">
-            select * from police_info where account = #{account}
-        </if>
-    </select>
-
-    <insert id="insertPoliceman" parameterType="com.mlxt.pojo.Policeman">
-        insert into police_info(
-        <if test="account != null and account != ''">
-            account,
-        </if>
-        <if test="password != null and password != ''">
-            password
-        </if>
-        )value(
-        <if test="account != null and account != ''">
-            #{account},
-        </if>
-        <if test="password != null and password != ''">
-            #{password}
-        </if>
-        )
-    </insert>
-    
-    <select id="findOldman"  parameterType="com.mlxt.pojo.OldMan" resultType="com.mlxt.pojo.OldMan">
+    <select id="findOldmanById"  parameterType="Integer" resultType="com.mlxt.pojo.OldMan">
         select
-            a.id a.name,
-            a.address,
-            a.img_path,
-            b.fm_tel,
-            b.fm_name 
-        from old_info a,family_info b
-        where a.id = b.om_id
+            a.id as id,
+            a.name as name,
+            a.address as address,
+            a.img_path as imgPath,
+            a.face_location as faceLocation,
+            b.fm_tel as fmTel,
+            b.fm_name as fmName
+        from old_info a,fam_info b
+        <trim prefix="where" prefixOverrides="and">
+            and a.id = b.om_id
+        <if test="oldManId != null and oldManId != ''">
+            and a.id = #{oldManId}
+        </if>
+        </trim>
+        LIMIT 1
+     </select>
+     
+     <select id="findImageList" resultType="com.mlxt.pojo.Image">
+        select
+            id,
+            img_path as imgPath,
+            face_location as imgLocation
+        from old_info
      </select>
 
 </mapper>

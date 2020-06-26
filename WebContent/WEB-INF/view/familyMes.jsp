@@ -10,7 +10,7 @@
     String policePath = path+"/mlxt/police/";
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
-    session.setAttribute("indexPath", basePath);
+    session.setAttribute("indexPath", indexPath);
     session.setAttribute("userPath", basePath+"mlxt/user/");
 %>
 <!DOCTYPE html>
@@ -38,14 +38,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${testPaperList2}">
+					<c:forEach var="familyMember" items="${page.rows}">
 					<tr>
-						<td>${item.code}</td>
-						<td>${item.name}</td>
-						<td>${item.answerTime}</td>
-						<td>${item.beginTime}</td>
-						<td>${item.score}</td>
-						<td><a href="#">详情</a></td>
+						<td>${familyMember.familyName}</td>
+						<td>${familyMember.familyTel}</td>
 					</tr>
 					</c:forEach>
 				</tbody>

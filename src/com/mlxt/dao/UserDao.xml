@@ -37,7 +37,10 @@
             address,
         </if>
         <if test="imgPath != null and imgPath != ''">
-            img_path
+            img_path,
+        </if>
+        <if test="faceLocation != null and faceLocation != ''">
+            face_location
         </if>
         )value(
         <if test="name != null and name != ''">
@@ -47,7 +50,10 @@
             #{address},
         </if>
         <if test="imgPath != null and imgPath != ''">
-            #{imgPath}
+            #{imgPath},
+        </if>
+        <if test="faceLocation != null and faceLocation != ''">
+            #{faceLocation}
         </if>
         )       
     </insert>
@@ -85,44 +91,53 @@
         <if test="address != null and address != ''">
             address = #{address},
         </if>
-        <if test="img_path != null and img_path != ''">
-            img_path = #{img_path},
+        <if test="imgPath != null and imgPath != ''">
+            img_path = #{imgPath},
         </if>
-        </trim>>
-        where id = "#{id}"
+        <if test="faceLocation != null and faceLocation != ''">
+            face_location = #{faceLocation},
+        </if>
+        </trim>
+        where id = #{id}
     </update>
     
     <update id="updateFamily" parameterType="com.mlxt.pojo.Family">
         update fam_info
         <trim prefix="set" suffixOverrides=",">
-        <if test="fm_tel != null and fm_tel != ''">
-            fm_tel = #{fm_tel},
+        <if test="familyTelModify != null and familyTelModify != ''">
+            fm_tel = #{familyTelModify},
         </if>
-        <if test="fm_name != null and fm_name != ''">
-            fm_name = #{fm_name},
+        <if test="familyName != null and familyName != ''">
+            fm_name = #{familyName},
         </if>
         </trim>
+        where fm_tel = #{familyTel}
     </update>
     
     <select id="selectFamilyList" parameterType="String" resultType="com.mlxt.pojo.Family">
         select
-            a.id,
-            a.name,
-            a.address,
-            a.img_path,
-            b.fm_tel,
-            b.fm_name
+            a.id as oldManId,
+            a.name as oldManName,
+            b.fm_tel as familyTel,
+            b.fm_name as familyName
         from old_info a,fam_info b
         <trim prefix="where" prefixOverrides="and">
             and a.id = b.om_id
             <if test="tel != null and tel != ''">
-                and b.om_id = select om_id from fam_info where fm_tel = #{tel}
+                and b.om_id = (select om_id from fam_info where fm_tel = #{tel})
             </if>
-        </trim>  
+        </trim>
     </select>
     
-    <select id="selectAllUserList" resultType="com.mlxt.pojo.User">
-        select * from user_info
+    <select id="selectFamilyCount" parameterType="String" resultType="Integer">
+        select count(*)
+        from old_info a,fam_info b
+        <trim prefix="where" prefixOverrides="and">
+            and a.id = b.om_id
+            <if test="tel != null and tel != ''">
+                and b.om_id = (select om_id from fam_info where fm_tel = #{tel})
+            </if>
+        </trim>
     </select>
     
     <select id="findOldManIdByOldMan" parameterType="com.mlxt.pojo.OldMan" resultType="Integer">
@@ -137,7 +152,7 @@
             <if test="imgPath != null and imgPath != ''">
                 and img_path = #{imgPath}
             </if>
-        </trim>  
+        </trim>
     </select>
     
     <select id="findOldManIdByFamily" parameterType="com.mlxt.pojo.Family" resultType="Integer">
@@ -149,11 +164,35 @@
             <if test="familyName != null and familyName != ''">
                 and fm_name = #{familyName}
             </if>
-        </trim>  
+        </trim>
+    </select>
+    
+    <select id="findOldMan" parameterType="Integer" resultType="com.mlxt.pojo.OldMan">
+        select id,address,img_path as imgPath from old_info
+        <trim prefix="where" prefixOverrides="and">
+            <if test="oldManId != null and oldManId != ''">
+                and id = #{oldManId}
+            </if>
+        </trim>
     </select>
     
     <select id="findUserName" parameterType="String" resultType="String">
         select fm_name from fam_info where fm_tel = #{familyTel}
     </select>
+    
+    <delete id="delFamily" parameterType="com.mlxt.pojo.Family">
+        delete from fam_info
+        <trim prefix="where" prefixOverrides="and">
+            <if test="oldManId != null and oldManId != ''">
+                and om_id = #{oldManId}
+            </if>
+            <if test="familyTel != null and familyTel != ''">
+                and fm_tel = #{familyTel}
+            </if>
+            <if test="familyName != null and familyName != ''">
+                and fm_name = #{familyName}
+            </if>
+        </trim>
+    </delete>
 
 </mapper>

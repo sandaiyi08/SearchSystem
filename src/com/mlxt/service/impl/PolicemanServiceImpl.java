@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mlxt.dao.PolicemanDao;
+import com.mlxt.pojo.Image;
 import com.mlxt.pojo.OldMan;
 import com.mlxt.pojo.Policeman;
 import com.mlxt.service.PolicemanService;
@@ -31,28 +32,13 @@ public class PolicemanServiceImpl implements PolicemanService {
 	}
 
 	@Override
-	public Integer deletePolice(String account) {
-		return this.policemanDao.deletePolice(account);
+	public OldMan findOldmanById(Integer oldManId) {
+		return this.policemanDao.findOldmanById(oldManId);
 	}
 
 	@Override
-	public OldMan findOldman(OldMan oldman) {
-		return this.policemanDao.findOldman(oldman);
-	}
-
-	@Override
-	public List<Policeman> selectAllPolicemanList() {
-		return this.policemanDao.selectAllPolicemanList();
-	}
-
-	@Override
-	public Policeman getPolicemanByAccount(String account) {
-		return this.policemanDao.getPolicemanByAccount(account);
-	}
-
-	@Override
-	public Integer insertPoliceman(Policeman policeman) {
-		return this.policemanDao.insertPoliceman(policeman);
+	public List<Image> findImageList() {
+		return this.policemanDao.findImageList();
 	}
 
 }

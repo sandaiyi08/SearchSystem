@@ -10,7 +10,7 @@
     String policePath = path+"/mlxt/police/";
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
-    session.setAttribute("indexPath", basePath);
+    session.setAttribute("indexPath", indexPath);
     session.setAttribute("userPath", basePath+"mlxt/user/");
 %>
 <!DOCTYPE html>
@@ -130,11 +130,11 @@
 		color: black;
 	}
 	.log_background{
-		background: url("<%=basePath%>plug-in/system/images/face1.jpg") no-repeat center center fixed;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
+		background: url("<%=basePath%>plug-in/system/images/face.png") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
 	}
 	.logindiv{
 		position="absolute";
@@ -150,7 +150,7 @@
 
 
 <body
-	style="background: url(plug-in/system/images/face1.jpg) no-repeat center center fixed; background-size: 100%;" 
+	style="background: url(<%=basePath %>plug-in/system/images/face.png) no-repeat center center fixed; background-size: 100%;" 
 	onkeydown="EnterPress()">
 	<div class="modal-dialog"
 		style="margin-top: 7.5%; width: 500px; height: 500px">
@@ -163,7 +163,7 @@
 					<div class="form-group">
 						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
 						<label for="tel" class="col-sm-2 control-label"><img
-							src="plug-in/system/images/demo1.png" width="30" height="30"></label>
+							src="<%=basePath %>plug-in/system/images/demo1.png" width="30" height="30"></label>
 						<div class="col-sm-10">
 							<input id="tel" name="tel" type="text" class="form-control"
 								placeholder="手机号 " style="width: 310px;">
@@ -172,25 +172,25 @@
 					<div class="form-group">
 						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
 						<label for="password" class="col-sm-2 control-label"><img
-							src="plug-in/system/images/demo2.png" width="30" height="30"></label>
+							src="<%=basePath %>plug-in/system/images/demo2.png" width="30" height="30"></label>
 						<div class="col-sm-10">
-							<input id="password" name="password" type="text"
+							<input id="password" name="password" type="password"
 								class="form-control" placeholder="密码" style="width: 310px;">
 						</div>
 					</div>
 					<div class="form-group">
 						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
 						<label for="repassword" class="col-sm-2 control-label"><img
-							src="plug-in/system/images/demo2.png" width="30" height="30"></label>
+							src="<%=basePath %>plug-in/system/images/demo2.png" width="30" height="30"></label>
 						<div class="col-sm-10">
-							<input id="repassword" name="repassword" type="text"
+							<input id="repassword" name="repassword" type="password"
 								class="form-control" placeholder="确认密码" style="width: 310px;">
 						</div>
 					</div>
 					<div class="form-group">
 						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
 						<label for="lastname" class="col-sm-2 control-label"><img
-							src="plug-in/system/images/demo3.png" width="25" height="30"></label>
+							src="<%=basePath %>plug-in/system/images/demo3.png" width="25" height="30"></label>
 						<div class="col-sm-10">
 							<div class="input-group">
 								<input id="code" name="code" type="text" class="form-control"
@@ -204,7 +204,7 @@
 			<div class="modal-footer">
 				<a type="button" class="btn btn-primary" onclick="validate()">注册</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				<a type="button" class="btn btn-default" href="<%=basePath%>index.jsp">返回</a>
+				<a type="button" class="btn btn-default" href="<%=indexPath%>index">返回</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</div>
 		</div>

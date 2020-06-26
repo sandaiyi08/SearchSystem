@@ -72,10 +72,11 @@ public interface UserDao {
 	public List<Family> selectFamilyList(String tel);
 	
 	/**
-	 * ·用户信息查询
+	 * ·家庭成员数量查询
+	 * @param tel
 	 * @return
 	 */
-	public List<User> selectAllUserList();
+	public Integer selectFamilyCount(String tel);
 	
 	/**
 	 * ·通过老人信息查找老人ID
@@ -92,10 +93,24 @@ public interface UserDao {
 	public Integer findOldManIdByFamily(Family family);
 	
 	/**
+	 * ·通过Id查找老人信息
+	 * @param oldManId
+	 * @return
+	 */
+	public OldMan findOldMan(Integer oldManId);
+	
+	/**
 	 * ·查找用户名
 	 * @param familyTel
 	 * @return
 	 */
 	public String findUserName(String familyTel);
+	
+	/**
+	 * ·删除家庭成员
+	 * @param family
+	 * @return
+	 */
+	public Integer delFamily(Family family);
 	
 }

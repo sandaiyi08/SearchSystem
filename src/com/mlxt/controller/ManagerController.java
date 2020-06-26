@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.mlxt.pojo.Manager;
+import com.mlxt.pojo.Policeman;
+import com.mlxt.pojo.User;
 import com.mlxt.service.ManagerService;
 
 /**
@@ -104,8 +108,10 @@ public class ManagerController {
 	 * @return
 	 */
 	@RequestMapping("/manageUser")
-	public String managePeople(HttpSession session) {
+	public String managePeople(User user, @RequestParam(defaultValue="1")Integer page, 
+			@RequestParam(defaultValue="5")Integer rows, HttpSession session, Model model) {
 		indexPath = (String) session.getAttribute("indexPath");
+		model.addAttribute("page", this.managerService.findUserPage(user, page, rows));
 		return "adminPeople";
 	}
 	
@@ -115,8 +121,10 @@ public class ManagerController {
 	 * @return
 	 */
 	@RequestMapping("/managePolice")
-	public String managePolice(HttpSession session) {
+	public String managePolice(Policeman policeman, @RequestParam(defaultValue="1")Integer page, 
+			@RequestParam(defaultValue="5")Integer rows, HttpSession session, Model model) {
 		indexPath = (String) session.getAttribute("indexPath");
+		model.addAttribute("page", this.managerService.findPolicePage(policeman, page, rows));
 		return "adminPolice";
 	}
 	
@@ -126,8 +134,10 @@ public class ManagerController {
 	 * @return
 	 */
 	@RequestMapping("/peopleMessage")
-	public String peopleMessage(HttpSession session) {
+	public String peopleMessage(User user, @RequestParam(defaultValue="1")Integer page, 
+			@RequestParam(defaultValue="5")Integer rows, HttpSession session, Model model) {
 		indexPath = (String) session.getAttribute("indexPath");
+		model.addAttribute("page", this.managerService.findUserPage(user, page, rows));
 		return "peopleMessage";
 	}
 	
@@ -137,8 +147,66 @@ public class ManagerController {
 	 * @return
 	 */
 	@RequestMapping("/policeMessage")
-	public String policeMessage(HttpSession session) {
+	public String policeMessage(Policeman policeman, @RequestParam(defaultValue="1")Integer page, 
+			@RequestParam(defaultValue="5")Integer rows, HttpSession session, Model model) {
 		indexPath = (String) session.getAttribute("indexPath");
+		model.addAttribute("page", this.managerService.findPolicePage(policeman, page, rows));
 		return "policeMessage";
+	}
+	
+	@RequestMapping("/modifyUser.do")
+	@ResponseBody
+	public String userModify(User user, Model model, RedirectAttributesModelMap modelMap, HttpSession session) {
+		indexPath = (String) session.getAttribute("indexPath");
+		Integer rows = 0;
+		if (user != null) {
+			rows = this.managerService.updateUser(user);
+		} else {
+			model.addAttribute("msg", "用户信息数据不能全为空！");
+			return "Fail";
+		}
+		if (rows > 0) {
+			
+			return "OK";
+		}
+		model.addAttribute("msg", "用户信息修改失败！");
+		return "Fail";
+	}
+	
+	@RequestMapping("/addPolice.do")
+	@ResponseBody
+	public String addPoliceman(Policeman policeman, HttpSession session, Model model) {
+		indexPath = (String) session.getAttribute("indexPath");
+		Integer rows = 0;
+		if (policeman != null && policeman.getAccount() != null && policeman.getAccount() != "" 
+				&& policeman.getPassword() != null && policeman.getPassword() != "") {
+			rows = this.managerService.insertPoliceman(policeman);
+		} else {
+			model.addAttribute("msg", "警察数据不能为空！");
+			return "Fail";
+		}
+		if (rows > 0) {
+			return "OK";
+		}
+		model.addAttribute("msg", "警察账号添加错误！");
+		return "Fail";
+	}
+	
+	@RequestMapping("/delPolice.do")
+	@ResponseBody
+	public String delPoliceman(String account, HttpSession session, Model model) {
+		indexPath = (String) session.getAttribute("indexPath");
+		Integer rows = 0;
+		if (account != null && account != "") {
+			rows = this.managerService.deletePolice(account);
+		} else {
+			model.addAttribute("msg", "警察账号数据错误！");
+			return "Fail";
+		}
+		if (rows > 0) {
+			return "OK";
+		}
+		model.addAttribute("msg", "警察账号数据错误！");
+		return "Fail";
 	}
 }
