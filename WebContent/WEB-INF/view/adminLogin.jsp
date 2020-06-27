@@ -25,7 +25,7 @@
 
 <script type="text/javascript">
 
-    function startload(){
+    function startload1(){
         /* var thiswidth = document.documentElement.clientWidth;
         var thisheignt = document.documentElement.clientHeight;
         var loginform = document.getElementById("loginform");
@@ -64,6 +64,13 @@
             alert("您还未登录，请登录！");
         }else if("${msg}" != null && "${msg}" != ""){
             alert("${msg}");
+        }
+    };
+    
+    var msg = "${msg}";
+    function startload(){
+        if(msg != null && msg != ""){
+            alert(msg);
         }
     };
     
@@ -127,9 +134,9 @@
 
 <body
 	style="background: url(<%=basePath%>plug-in/system/images/face.png) no-repeat center center fixed; background-size: 100%;"
-	onkeydown="EnterPress()">
+	onkeydown="EnterPress()" onload="startload()">
 	<div class="modal-dialog"
-		style="margin-top: 13s%; width: 500px; height: 500px">
+		style="margin-top: 13%; width: 500px; height: 400px">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title text-center" id="myModalLabel">管&nbsp;&nbsp;理&nbsp;&nbsp;员&nbsp;&nbsp;登&nbsp;&nbsp;录</h4>

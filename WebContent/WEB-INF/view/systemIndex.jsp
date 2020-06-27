@@ -31,38 +31,64 @@
 <link href="<%=basePath%>plug-in/bootstrap-3.3.7/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
 <script src="<%=basePath%>plug-in/jquery-3.4.1/jquery-3.4.1.js"></script>
 <script src="<%=basePath%>plug-in/bootstrap-3.3.7/js/bootstrap.js"></script>
+<script src="<%=basePath%>plug-in/system/js/popper.min.js"></script>
 
 <style type="text/css">
 .starter-template {
-	padding: 40px 15px;
-	text-align: center;
+    padding: 40px 15px;
+    text-align: center;
 }
 
 .address {
-	background: #efb73e;
-	color: #fff;
-	padding: 10px 0;
+    background: #efb73e;
+    color: #fff;
+    padding: 10px 0;
 }
 
 .code {
-	background-image: url();
-	font-family: Arial, 宋体;
-	font-style: italic;
-	color: green;
-	border: 0;
-	padding: 2px 3px;
-	letter-spacing: 3px;
-	font-weight: bolder;
+    background-image: url();
+    font-family: Arial, 宋体;
+    font-style: italic;
+    color: green;
+    border: 0;
+    padding: 2px 3px;
+    letter-spacing: 3px;
+    font-weight: bolder;
 }
 
 .unchanged {
-	border: 0;
+    border: 0;
 }
+
+.title {
+    position: absolute;
+    left: 50px;
+    top: 20px;
+    font-size: 32px;
+    color: white;
+}
+.carousel-inner img {
+      width: 100%;
+      height: 350px;
+  }
+
+
+.explain {
+    position: absolute;
+    left: 100px;
+    top: 85px;
+    font-family: STFangsong;
+    font-size: 18px;
+    color: white;
+    width: 500px;
+    line-height: 35px;
+}
+
 /* 响应式布局 - 小于 600 px 时改为上下布局 */
 @media screen and (max-width: 600px) {
-	.column {
-		width: 100%;
-	}
+    .column {
+        width: 100%;
+    }
 }
 </style>
 </head>
@@ -115,8 +141,8 @@
 <body>
 	<div class="header">
 		<div class="footer text-center"
-			style="background-color: #46A3FF; height: 90px;">
-			<div class="container" style="padding-top: 20px;">
+			style="background-color: #46A3FF; height: 110px;">
+			<div class="container" style="padding-top: 30px;">
 				<div class="navbar-header">
 					<a class="navbar-brand" style="font-size: 30px; color: #ffffff">麋&nbsp;&nbsp;鹿&nbsp;&nbsp;寻&nbsp;&nbsp;途&nbsp;&nbsp;系&nbsp;&nbsp;统</a>
 				</div>
@@ -184,73 +210,65 @@
 			<div class="carousel-inner">
 				<div id="pic0" class="item active">
 
-					<img src="<%=basePath%>plug-in/system/images/face1.jpg"
+					<img src="<%=basePath%>plug-in/system/images/face.png"
 						alt="First slide" style="height: 350px; width: 100%">
-					<div class="carousel-caption">
-						<div style="text-align: left">
-							<h1>麋鹿寻途系统</h1>
-							<br/>
-							<p>麋鹿寻途系统是一款帮助民警找到走失老人的家人的便民惠民系统，能够有效地提高对走失老人的寻找效率。
-							用户在注册完成后便可将自己或家人的住址信息、联系方式、面部信息上传到系统中，在民警遇到走失的老人之后，
-							便可通过对走失者进行面部扫描，快速找到走失者的家人信息，将其安全快速地送回。</p>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-						</div>
-					</div>
+					<div class="explain">
+                       <h2>利用人脸识别技术帮助老人回家</h2>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;麋鹿寻途系统是一款帮助民警找到走失老人的家人的便民惠民系统，能够有效地提高对走失老人的寻找效率。
+                    </div>
 				</div>
 				<div id="pic1" class="item">
-					<img src="<%=basePath%>plug-in/system/images/face1.jpg"
+					<img src="<%=basePath%>plug-in/system/images/face2.png"
 						alt="Second slide" style="height: 350px; width: 100%">
+					<div class="explain">
+					   <h2>利用人脸识别技术帮助老人回家</h2>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;麋鹿寻途系统是一款帮助民警找到走失老人的家人的便民惠民系统，能够有效地提高对走失老人的寻找效率。
+                    </div>
 				</div>
 				<div id="pic2" class="item">
-					<img src="<%=basePath%>plug-in/system/images/face2.jpg"
+					<img src="<%=basePath%>plug-in/system/images/face2.png"
 						alt="Third slide" style="height: 350px; width: 100%">
+					<div class="explain">
+                       <h2>利用人脸识别技术帮助老人回家</h2>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;麋鹿寻途系统是一款帮助民警找到走失老人的家人的便民惠民系统，能够有效地提高对走失老人的寻找效率。
+                    </div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="container">
-		<div class="col-md-6">
-			<div style="height: 300px; margin-left: 40px; font-size: 20px;">
-				<br>
-				<br>
-				<br>
-				<p>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;近年来，老人走失的新闻越来越频繁的
-					出现在人们的视线中。帮助老人回家已是当 今社会热点内容。在“刷脸”的风潮下，我们 将利用人脸识别技术，采集老人面部信息,获
-					取家人的联系方式
-					<button type="button" class="btn btn-link">了解更多</button>
-				</p>
-			</div>
-		</div>
-		<div class="col-md-4"
-			style="margin-top: 20px; width: 400px; text-align: center;">
-			<img src="<%=basePath%>plug-in/system/images/face4.gif" class="img-responsive">
-		</div>
-	</div>
-	<div class="container">
-		<div class="col-md-4"
-			style="margin-top: 20px; width: 400px; text-align: center;">
-			<img src="<%=basePath%>plug-in/system/images/face4.gif" class="img-responsive">
-		</div>
-		<div class="col-md-6">
-			<div style="height: 300px; margin-left: 40px; font-size: 20px;">
-				<br>
-				<br>
-				<br>
-				<p>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;近年来，老人走失的新闻越来越频繁的
-					出现在人们的视线中。帮助老人回家已是当 今社会热点内容。在“刷脸”的风潮下，我们 将利用人脸识别技术，采集老人面部信息,获
-					取家人的联系方式
-					<button type="button" class="btn btn-link">了解更多</button>
-				</p>
-			</div>
-		</div>
-	</div>
+        <div class="col-md-6" style="height:300px">
+            <div style="height: 300px;margin-left: 50px; margin-top: 70px;font-size: 20px;line-height:40px;">
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;近年来，老人走失的新闻越来越频繁的
+                    出现在人们的视线中。帮助老人回家已是当 今社会热点内容。在“刷脸”的风潮下，我们 将利用人脸识别技术，采集老人面部信息,获
+                    取家人的联系方式
+                    <a type="button" class="btn btn-link" href="about.jsp">了解更多</a>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4" style="margin-top: 40px; width: 200px">
+            <div style="height: 300px;margin-left: 28px; ">
+                <img src="<%=basePath%>plug-in/system/images/face3.png"
+                    style="height: 250px; width: 400px">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-md-6"
+            style="margin-left: 60px; width: 400px; text-align: center;">
+            <img src="<%=basePath%>plug-in/system/images/pic1.png" class="img-responsive" style="height: 250px; width: 450px">
+        </div>
+        <div class="col-md-6">
+            <div style="height: 300px; margin-left: 60px;margin-top: 10px; font-size: 20px;line-height:40px;">
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;麋鹿寻途系统是一款利用人脸识别技术帮助民警快速找到走失老人家人的系统。用户在注册后便可将自己和家人的信息上传到系统中，在民警遇到走失的老人之后，便可通过对走失者进行面部扫描，快速找到走失者的家人信息
+                    <a type="button" class="btn btn-link" href="about.jsp">了解更多</a>
+                </p>
+            </div>
+        </div>
+    </div>
 	<div class="footer" style="height: 180px;">
 		<div class="footer text-center"
 			style="background-color: #46A3FF; height: 180px;">
@@ -261,11 +279,13 @@
 				</div>
 				<div class="container">
 					<a class="navbar-brand" href="#"
-						style="font-size: 15px; color: #ffffff">地址：甘肃省兰州市西北师范大学</a> <a
-						class="navbar-brand" href="#"
-						style="font-size: 15px; color: #ffffff">电话：XXXXXXXXXXX</a> <a
-						class="navbar-brand" href="#"
+						style="font-size: 15px; color: #ffffff">地址：甘肃省兰州市西北师范大学</a>
+					<a class="navbar-brand" href="#"
+						style="font-size: 15px; color: #ffffff">电话：XXXXXXXXXXX</a>
+					<a class="navbar-brand" href="#"
 						style="font-size: 15px; color: #ffffff">邮箱：sandaiyi08@163.com</a>
+					<a class="navbar-brand" href="<%=managePath %>index"
+                        style="font-size: 15px; color: #ffffff">管理</a>
 				</div>
 			</div>
 		</div>

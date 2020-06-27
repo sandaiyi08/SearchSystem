@@ -25,7 +25,7 @@
 
 <script type="text/javascript">
 
-    function startload(){
+    function startload1(){
         /* var thiswidth = document.documentElement.clientWidth;
         var thisheignt = document.documentElement.clientHeight;
         var loginform = document.getElementById("loginform");
@@ -65,7 +65,14 @@
         }else if("${msg}" != null && "${msg}" != ""){
             alert("${msg}");
         }
-    }
+    };
+    
+    var msg = "${msg}";
+    function startload(){
+        if(msg != null && msg != ""){
+            alert(msg);
+        }
+    };
     
     function EnterPress(e){ //传入 event 
         var e = e || window.event;

@@ -25,7 +25,7 @@
 
 <script type="text/javascript">
 
-	function startload(){
+	function startload1(){
 		/* var thiswidth = document.documentElement.clientWidth;
         var thisheignt = document.documentElement.clientHeight;
         var loginform = document.getElementById("loginform");
@@ -66,6 +66,13 @@
             alert("${msg}");
         }
 	};
+	
+	var msg = "${msg}";
+    function startload(){
+        if(msg != null && msg != ""){
+            alert(msg);
+        }
+    };
 	
 	function EnterPress(e){ //传入 event 
         var e = e || window.event;
@@ -127,7 +134,7 @@
 
 <body
 	style="background: url(<%=basePath %>plug-in/system/images/face.png) no-repeat center center fixed; background-size: 100%;"
-	onkeydown="EnterPress()">
+	onkeydown="EnterPress()" onload="startload()">
 	<div class="modal-dialog"
 		style="margin-top: 10%; width: 500px; height: 500px">
 		<div class="modal-content">

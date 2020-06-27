@@ -25,7 +25,7 @@
 
 <script type="text/javascript">
 
-    function startload(){
+    function startload1(){
         /* var thiswidth = document.documentElement.clientWidth;
         var thisheignt = document.documentElement.clientHeight;
         var loginform = document.getElementById("loginform");
@@ -65,7 +65,14 @@
         }else if("${msg}" != null && "${msg}" != ""){
             alert("${msg}");
         }
-    }
+    };
+    
+    var msg = "${msg}";
+    function startload(){
+        if(msg != null && msg != ""){
+            alert(msg);
+        }
+    };
     
     function EnterPress(e){ //传入 event 
         var e = e || window.event;
@@ -90,7 +97,7 @@
         
         var formData = new FormData($("#userInfoForm")[0]);
         $.ajax({
-            url: 'http://localhost:8080/SearchSystem/mlxt/user/modifyUser.do',
+            url: 'modifyUser.do',
             type: 'POST',
             data: formData,
             async: false,
@@ -103,7 +110,7 @@
                     clearFormData();
                     window.location.reload();
                 } else{
-                    alert("${msg}");
+                    alert(msg);
                 }
             }
         });
@@ -154,8 +161,8 @@
 						<a type="submit" class="btn btn-primary" data-toggle="modal"
 							style="background-color: #3894FF" onclick="validate()">完成</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a type="button"
-							class="btn btn-primary" href="#" data-dismiss="modal"
-							style="background-color: #3894FF">取消</a>
+							class="btn btn-primary" data-dismiss="modal"
+							style="background-color: #3894FF" onclick="clearFormData()">取消</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</form>
 				</div>

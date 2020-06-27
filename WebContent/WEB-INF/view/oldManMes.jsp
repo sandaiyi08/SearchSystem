@@ -14,6 +14,7 @@
     String systemPath = path+"/mlxt/";
     session.setAttribute("indexPath", indexPath);
     session.setAttribute("userPath", basePath+"mlxt/user/");
+    String imgPath = (String) session.getAttribute("IMG_SESSION");
 %>
 <!DOCTYPE html>
 <html>
@@ -34,7 +35,7 @@
 	    <div class="container">
 			    <div class="col-sm-4">
 			      	<div style="margin-left: 50px; margin-top: 30px; font-size: 16px;" >
-			      		<img src="${oldMan.imgPath}" class="img-responsive" alt="Cinque Terre" width="304" height="236"> 
+			      		<img src="<%=imgPath %>" class="img-responsive" alt="Cinque Terre" width="304" height="236"> 
 				  	</div>
 			    </div>
 		    	<div class="col-sm-6" >

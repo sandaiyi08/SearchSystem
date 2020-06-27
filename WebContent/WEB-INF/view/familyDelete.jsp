@@ -25,6 +25,13 @@
 
 <script type="text/javascript">
 
+    var msg = "${msg}";
+    function startload(){
+        if(msg != null && msg != ""){
+            alert(msg);
+        }
+    };
+
 	function deleteFamily(oldManId, familyName, familyTel) {
 		var r = confirm("您确定删除吗？");
 		if (r == true) {

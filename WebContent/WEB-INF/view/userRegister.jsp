@@ -24,50 +24,26 @@
 <script type="text/javascript" src="<%=basePath%>plug-in/bootstrap-3.3.7/js/bootstrap.js"></script>
 
 <script type="text/javascript">
-
-    var code = 1111;
-    
-	function startload(){
-		/* var thiswidth = document.documentElement.clientWidth;
-		var thisheignt = document.documentElement.clientHeight;
-		var loginform = document.getElementById("loginform");
-		var passworddiv = document.getElementById("passworddiv");
-		var codetext = document.getElementById("codetext");
-		var passwordtext = document.getElementById("passwordtext");
-		var radioset = document.getElementById("radioset");
-		
-		var formwidth = 0.205*thiswidth;
-		var formheight = 0.18*thisheignt;
-		var textheight = 0.0745*thisheignt;
-		
-		loginform.style.position="absolute";
-		passworddiv.style.position="absolute";
-		passwordtext.style.position="absolute";
-		radioset.style.position="absolute";
-		
-		loginform.style.width = formwidth+"px";
-		loginform.style.height = formheight+"px";
-		
-		loginform.style.left = 0.4345*thiswidth+"px";
-		loginform.style.top = 0.4747*thisheignt+"px";
-		
-		radioset.style.marginLeft = 0.01*thiswidth+"px";
-		radioset.style.marginTop = 0.132*thisheignt+"px";
-		
-		passwordtext.style.marginTop = 0.179*formheight+"px";
-		
-		codetext.style.height = textheight+"px";
-		codetext.style.width = formwidth+"px";
-		
-		passwordtext.style.height = textheight+"px";
-		passwordtext.style.width = formwidth+"px"; */
-		
-		if("${user}" == null){
-			alert("您还未登录，请登录！");
-		}else if("${msg}" != null && "${msg}" != ""){
-			alert("${msg}");
-		}
-	};
+	
+	var msg = "${msg}";
+    function startload(){
+        if(msg != null && msg != ""){
+            alert(msg);
+        }
+    };
+	
+	var code;
+    function createCode() {
+        code = new Array();
+        var codeLength = 4;
+        var selectChar = new Array('1','2','3','4','5','6','7','8','9','0');
+        for (var i = 0;i < codeLength; i++) {
+            code += selectChar[Math.floor(Math.random() * 10)];
+        }
+        if (code.length != codeLength) {
+            createCode();
+        }
+    };
 	
 	function EnterPress(e){ //传入 event 
 		var e = e || window.event;
@@ -77,11 +53,18 @@
 	};
 	
 	function validate() {
+		var tel = document.getElementById("tel").value;
         var inputCode = document.getElementById("code").value.toUpperCase();
         var password = document.getElementById("password").value;
         var repassword = document.getElementById("repassword").value;
         
-        if (inputCode.length <= 0) {
+        if (tel == null || tel == '') {
+        	alert("请输入手机号码！");
+            return false;
+        } else if (!(/^1[3456789]\d{9}$/.test(tel))) {
+            alert("手机号码有误，请重新填写！");
+            return false;
+        } else if (inputCode.length <= 0) {
             alert("请输入验证码！");
             return false;
         } else if (inputCode != code) {
@@ -151,7 +134,7 @@
 
 <body
 	style="background: url(<%=basePath %>plug-in/system/images/face.png) no-repeat center center fixed; background-size: 100%;" 
-	onkeydown="EnterPress()">
+	onkeydown="EnterPress()" onload="startload()">
 	<div class="modal-dialog"
 		style="margin-top: 7.5%; width: 500px; height: 500px">
 		<div class="modal-content">
@@ -194,11 +177,32 @@
 						<div class="col-sm-10">
 							<div class="input-group">
 								<input id="code" name="code" type="text" class="form-control"
-									placeholder="验证码" autocomplete="off" style="width: 240px;">
-								<button class="btn btn-default" type="button">验证码</button>
+									placeholder="验证码" autocomplete="off" style="width: 200px;">
+								<button class="btn btn-default" type="button" id="codeBtn" style="width: 110px;">验证码</button>
 							</div>
 						</div>
 					</div>
+					<script type="text/javascript">
+						var codeBtn = document.getElementById("codeBtn");
+						codeBtn.onclick = function() {
+							createCode();
+							alert("您的验证码为： " + code);
+							codeBtn.disabled = true; //当点击后倒计时时候不能点击此按钮
+							var time = 9; //倒计时59秒
+							var timer = setInterval(fun1, 1000); //设置定时器
+							function fun1() {
+								time--;
+								if (time >= 0) {
+									codeBtn.innerHTML = time + "s后重新发送";
+								} else {
+									codeBtn.innerHTML = "重新发送验证码";
+									codeBtn.disabled = false; //倒计时结束能够重新点击发送的按钮
+									clearTimeout(timer); //清除定时器
+									time = 9; //设置循环重新开始条件
+								}
+							}
+						};
+					</script>
 				</form>
 			</div>
 			<div class="modal-footer">

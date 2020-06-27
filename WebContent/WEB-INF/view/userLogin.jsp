@@ -10,6 +10,7 @@
     String policePath = path+"/mlxt/police/";
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
+    session.setAttribute("basePath", basePath);
     session.setAttribute("indexPath", indexPath);
     session.setAttribute("userPath", basePath+"mlxt/user/");
 %>
@@ -26,12 +27,11 @@
 <script type="text/javascript">
 
     var code = 1111;
+    var msg = "${msg}";
 
 	function startload(){
-		if("${user}" == null){
-            alert("您还未登录，请登录！");
-        }else if("${msg}" != null && "${msg}" != ""){
-            alert("${msg}");
+		if(msg != null && msg != ""){
+            alert(msg);
         }
 	};
 	
@@ -46,11 +46,11 @@
         var tel = document.getElementById("tel").value;
         var password = document.getElementById("password").value;
         
-        if (password == null || password == '') {
-            alert("密码不能为空！");
+        if (tel == null || tel == '') {
+        	alert("账号不能为空！");
             return false;
-        } else if (tel == null || tel == '') {
-            alert("账号不能为空！");
+        } else if (password == null || password == '') {
+            alert("密码不能为空！");
             return false;
         } else {
         	userLogin();
@@ -95,7 +95,7 @@
 
 <body
 	style="background: url(<%=basePath %>plug-in/system/images/face.png) no-repeat center center fixed; 
-	background-size: cover; z-index: -1; " onkeydown="EnterPress()">
+	background-size: cover; z-index: -1; " onkeydown="EnterPress()" onload="startload()">
 	<div class="modal-dialog"
 		style="margin-top: 10%; width: 500px; height: 500px">
 		<div class="modal-content">
@@ -121,9 +121,7 @@
 							<div class="input-group">
 								<input id="password" name="password" type="password"
 									class="form-control" placeholder="密码" autocomplete="off"
-									style="width: 240px; height: 40px;">
-								<button class="btn btn-default" type="button"
-									style="height: 40px">验证码</button>
+									style="width: 310px; height: 40px;">
 							</div>
 						</div>
 					</div>

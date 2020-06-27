@@ -147,7 +147,7 @@
                 and name = #{name}
             </if>
             <if test="address != null and address != ''">
-                and name = #{name}
+                and address = #{address}
             </if>
             <if test="imgPath != null and imgPath != ''">
                 and img_path = #{imgPath}
@@ -168,7 +168,7 @@
     </select>
     
     <select id="findOldMan" parameterType="Integer" resultType="com.mlxt.pojo.OldMan">
-        select id,address,img_path as imgPath from old_info
+        select id,address,name,img_path as imgPath from old_info
         <trim prefix="where" prefixOverrides="and">
             <if test="oldManId != null and oldManId != ''">
                 and id = #{oldManId}

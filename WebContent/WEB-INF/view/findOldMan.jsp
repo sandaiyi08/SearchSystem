@@ -31,7 +31,7 @@
 
 <script type="text/javascript">
 
-	function startload(){
+	function startload1(){
 		/* var thiswidth = document.documentElement.clientWidth;
         var thisheignt = document.documentElement.clientHeight;
         var loginform = document.getElementById("loginform");
@@ -72,6 +72,13 @@
             alert("${msg}");
         }
 	};
+	
+	var msg = "${msg}";
+    function startload(){
+        if(msg != null && msg != ""){
+            alert(msg);
+        }
+    };
 
 	//上传图片后预览图片
 	function viewImage(file) {
@@ -107,8 +114,9 @@
         if (docObj.files && docObj.files[0]) {
             //火狐下，直接设img属性  
             imgObjPreview.style.display = 'inline';
-            imgObjPreview.style.width = '200px';
+            imgObjPreview.style.width = '225px';
             imgObjPreview.style.height = '200px';
+            imgObjPreview.style.margin = '15px';
 
             //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式    
             imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
@@ -118,8 +126,8 @@
             var imgSrc = document.selection.createRange().text;
 
             //必须设置初始大小  
-            localImagId.style.width = "200px";
-            localImagId.style.height = "180px";
+            localImagId.style.width = "240px";
+            localImagId.style.height = "200px";
 
             //图片异常的捕捉，防止用户修改后缀来伪造图片  
             try {
@@ -186,71 +194,71 @@
 
 <style type="text/css">
 body {
-    font-size: 16px;
-    color: black;
+	font-size: 16px;
+	color: black;
 }
 
 input {
-    background-color: transparent;
-    outline: none;
-    border: 0px;
+	background-color: transparent;
+	outline: none;
+	border: 0px;
 }
 
 div.transbox {
-    width: 40%;
-    height: 30%;
-    margin: 10%;
-    background-color:#FFFAFA;
-    filter: alpha(opacity = 60);
-    opacity: 0.8;
+	width: 40%;
+	height: 30%;
+	margin: 10%;
+	background-color: #FFFAFA;
+	filter: alpha(opacity = 60);
+	opacity: 0.8;
 }
 
 .div_imgall {
-    border: 1px dashed black;
-    width: 42%;
-    height: 81%;
-    position: absolute;
-    top: 11%;
-    left: 29%;
-    z-index: 100;
+	border: 1px dashed black;
+	width: 42%;
+	height: 81%;
+	position: absolute;
+	top: 11%;
+	left: 29%;
+	z-index: 100;
 }
 
 .input_flie {
-    display: block;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    z-index: 100;
-    position: absolute;
-    left: 0;
-    top: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	z-index: 100;
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 
 .div_shuline {
-    position: absolute;
-    width: 50%;
+	position: absolute;
+    width: 36%;
     height: 2%;
     background-color: black;
-    left: 25%;
+    left: 32%;
     top: 49%;
     z-index: -1;
 }
 
 .div_hengline {
-    position: absolute;
-    width: 2%;
-    height: 50%;
-    background-color: black;
-    left: 49%;
-    top: 25%;
-    z-index: -1;
+	position: absolute;
+	width: 2%;
+	height: 50%;
+	background-color: black;
+	left: 49%;
+	top: 25%;
+	z-index: -1;
 }
 </style>
 </head>
 
 
-<body
-	style="background: url(<%=basePath%>plug-in/system/images/mes1.PNG) no-repeat center center fixed; background-size: cover;">
+<body onload="startload()"
+	style="background: url(<%=basePath%>plug-in/system/images/mes.PNG) no-repeat center center fixed; background-size: cover;">
 	<div class="header" style="height: 100px">
 		<div
 			style="margin-left: 80px; margin-top: 30px; float: left; line-height: 50px; color: #ffffff; font-size: 30px;">麋&nbsp;&nbsp;鹿&nbsp;&nbsp;寻&nbsp;&nbsp;途&nbsp;&nbsp;系&nbsp;&nbsp;统</div>
@@ -262,7 +270,7 @@ div.transbox {
 		</div>
 	</div>
 	<div class="background" align="center">
-		<div class="transbox" style="margin-top: 105px;">
+		<div class="transbox" style="margin-top: 60px; margin-bottom: 140px;">
 			<div class="modal-body" id="model-body" style="height: 250px">
 				<form id="imgUplodeForm" class="form-horizontal" enctype="multipart/form-data">
 					<div class="form-group" id="caseIma">

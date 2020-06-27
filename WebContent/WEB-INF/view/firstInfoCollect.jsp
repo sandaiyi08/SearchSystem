@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>用户登录</title>
+<title>信息录入</title>
 <link rel="shortcut icon" href="<%=basePath%>plug-in/system/images/favicon.ico">
 <link href="<%=basePath%>plug-in/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=basePath%>plug-in/jquery-3.4.1/jquery-3.4.1.js"></script>
@@ -25,7 +25,14 @@
 
 <script type="text/javascript">
 
-	function startload(){
+    var msg = "${msg}";
+    function startload(){
+        if(msg != null && msg != ""){
+            alert(msg);
+        }
+    };
+
+	function startload1(){
 		/* var thiswidth = document.documentElement.clientWidth;
         var thisheignt = document.documentElement.clientHeight;
         var loginform = document.getElementById("loginform");
@@ -144,10 +151,9 @@
             success: function(data) {
                 if(data == "OK") {
                     alert("信息上传成功！");
-                    clearFormData();
                     window.location.href = "<%=userPath %>message";
                 } else{
-                    alert("${msg}");
+                    alert(msg);
                 }
             }
         });
@@ -238,7 +244,7 @@
 							src="<%=basePath%>plug-in/system/images/demo5.png" width="30" height="30"></label>
 						<div class="col-sm-10">
 							<input id="familyName" name="familyName" type="text" class="form-control"
-								placeholder="姓名" style="width: 310px;">
+								placeholder="第二家庭成员姓名" style="width: 310px;">
 						</div>
 					</div>
 					<div class="form-group">
@@ -246,14 +252,14 @@
 							src="<%=basePath%>plug-in/system/images/demo7.png" width="30" height="30"></label>
 						<div class="col-sm-10">
 							<input id="familyTel" name="familyTel" type="text" class="form-control"
-								placeholder="联系方式" style="width: 310px;">
+								placeholder="第二家庭成员联系方式" style="width: 310px;">
 						</div>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<a type="submit" class="btn btn-primary" data-toggle="modal"
-					data-target="#regist" onclick="validateOldMan()">完成</a>
+					onclick="validateOldMan()">完成</a>
 			</div>
 		</div>
 	</div>

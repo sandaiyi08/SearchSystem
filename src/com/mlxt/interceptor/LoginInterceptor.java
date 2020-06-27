@@ -48,7 +48,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			session.setAttribute("usertype", 0);
 		}
 		// 除login外，拦截所有控制
-		if (url.indexOf("login") >= 0 || url.indexOf("register") >= 0) {
+		if (url.indexOf("login") >= 0 || url.indexOf("register") >= 0 || url.indexOf("about") >= 0) {
 			return true;
 		}
 

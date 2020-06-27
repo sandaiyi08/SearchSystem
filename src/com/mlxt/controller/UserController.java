@@ -171,8 +171,19 @@ public class UserController {
 	@RequestMapping("/oldManMes")
 	public String oldManMessage(HttpSession session, Model model) {
 		indexPath = (String) session.getAttribute("indexPath");
+		String basePath = (String) session.getAttribute("basePath");
 		Integer oldManId = (Integer) session.getAttribute("OLDMAN_ID_SESSION");
+		User user = (User) session.getAttribute("USER_SESSION");
 		OldMan oldMan = this.userService.findOldMan(oldManId);
+		
+		String suffixName = FilenameUtils.getExtension(oldMan.getImgPath());
+		String imgfilePath;
+		if (suffixName.equalsIgnoreCase("png")) {
+			imgfilePath = basePath + "/plug-in/person-data/" + user.getTel() + "/oldman.png";
+		} else {
+			imgfilePath = basePath + "/plug-in/person-data/" + user.getTel() + "/oldman.jpg";
+		}
+		session.setAttribute("IMG_SESSION", imgfilePath);
 		model.addAttribute("oldMan", oldMan);
 		return "oldManMes";
 	}
@@ -437,8 +448,10 @@ public class UserController {
 		Integer oldManId = (Integer) session.getAttribute("OLDMAN_ID_SESSION");
 		Integer rows = 0;
 		
+		System.out.println(oldMan);
+		
 		// Create imgPath
-		if (imgFile != null) {
+		if (imgFile != null && imgFile.getOriginalFilename() != null && imgFile.getOriginalFilename() != "") {
 			// Path
 			String suffixName = FilenameUtils.getExtension(imgFile.getOriginalFilename());
 			String imgName = "oldman." + suffixName;
@@ -506,8 +519,10 @@ public class UserController {
 		indexPath = (String) session.getAttribute("indexPath");
 		userPath = (String) session.getAttribute("userPath");
 		Integer oldManId = (Integer) session.getAttribute("OLDMAN_ID_SESSION");
+		User user = (User) session.getAttribute("USER_SESSION");
 		Integer rows = 0;
 		if (family != null) {
+			family.setFamilyTel(user.getTel());
 			family.setOldManId(oldManId);
 			rows = this.userService.updateFamily(family);
 		} else {

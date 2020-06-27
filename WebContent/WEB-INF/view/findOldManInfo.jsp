@@ -143,7 +143,7 @@ div.transbox {
 					<br>
 					<p>住址:${oldMan.address}</p>
 				</div>
-				<div class="photo"></div>
+				<!-- <div class="photo"></div> -->
 				<div class="div_hengline" style="width: 90%; top: 94%; left: 1px;">
 					<div class="modal-footer">
 						<h4 class="modal-title text-left" id="myModalLabel">家庭成员</h4>
