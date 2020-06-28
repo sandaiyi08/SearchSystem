@@ -30,31 +30,41 @@
     
     <insert id="insertOldMan" parameterType="com.mlxt.pojo.OldMan">
         insert into old_info(
-        <if test="name != null and name != ''">
-            name,
-        </if>
-        <if test="address != null and address != ''">
-            address,
-        </if>
-        <if test="imgPath != null and imgPath != ''">
-            img_path,
-        </if>
-        <if test="faceLocation != null and faceLocation != ''">
-            face_location
-        </if>
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                id,
+            </if>
+            <if test="name != null and name != ''">
+                name,
+            </if>
+            <if test="address != null and address != ''">
+                address,
+            </if>
+            <if test="imgPath != null and imgPath != ''">
+                img_path,
+            </if>
+            <if test="faceLocation != null and faceLocation != ''">
+                face_location,
+            </if>
+        </trim>
         )value(
-        <if test="name != null and name != ''">
-            #{name},
-        </if>
-        <if test="address != null and address != ''">
-            #{address},
-        </if>
-        <if test="imgPath != null and imgPath != ''">
-            #{imgPath},
-        </if>
-        <if test="faceLocation != null and faceLocation != ''">
-            #{faceLocation}
-        </if>
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                #{id},
+            </if>
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="address != null and address != ''">
+                #{address},
+            </if>
+            <if test="imgPath != null and imgPath != ''">
+                #{imgPath},
+            </if>
+            <if test="faceLocation != null and faceLocation != ''">
+                #{faceLocation},
+            </if>
+        </trim>
         )       
     </insert>
     

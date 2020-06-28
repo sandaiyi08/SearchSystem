@@ -57,6 +57,10 @@ public class ManagerServiceImpl implements ManagerService {
 		return this.managerDao.insertPoliceman(policeman);
 	}
 	
+	@Override
+	public Integer updatePolice(Policeman policeman) {
+		return this.managerDao.updatePolice(policeman);
+	}
 	
 	public Integer deletePolice(String account) {
 		return this.managerDao.deletePolice(account);
@@ -65,6 +69,31 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public Integer updateUser(User user) {
 		return this.managerDao.updateUser(user);
+	}
+	
+	@Override
+	public Integer updateOnlyUser(User user) {
+		return this.managerDao.updateOnlyUser(user);
+	}
+
+	@Override
+	public Integer deleteUser(String tel) {
+		return this.managerDao.deleteUser(tel);
+	}
+
+	@Override
+	public Integer deleteOldMan(Integer oldManId) {
+		return this.managerDao.deleteOldMan(oldManId);
+	}
+	
+	@Override
+	public Integer insertManager(Manager manager) {
+		return this.managerDao.insertManager(manager);
+	}
+
+	@Override
+	public Integer deleteManager(String account) {
+		return this.managerDao.deleteManager(account);
 	}
 	
 	@Override

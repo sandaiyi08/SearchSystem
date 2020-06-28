@@ -83,9 +83,9 @@
     
     function validate() {
         var familyName = document.getElementById("familyName").value;
-        var familyTel = document.getElementById("familyTel").value;
+        var familyTelModify = document.getElementById("familyTelModify").value;
         
-        if ((familyName == null || familyName == '') && (familyTel == null || familyTel == '')) {
+        if ((familyName == null || familyName == '') && (familyTelModify == null || familyTelModify == '')) {
             alert("要修改的信息不能全为空！");
             return false;
         } else {
@@ -102,7 +102,7 @@
             data: formData,
             async: false,
             cache: false,
-            contentType: 'charset=UTF-8',
+            contentType: false,
             processData: false,
             success: function(data) {
                 if(data == "OK"){
@@ -118,7 +118,7 @@
     
     function clearFormData(){
         $("#userInfoForm #familyName").val("");
-        $("#userInfoForm #familyTel").val("");
+        $("#userInfoForm #familyTelModify").val("");
     };
     
 </script>
@@ -147,11 +147,11 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<br> <label for="familyTel" class="col-sm-2 control-label"><img
+							<br> <label for="familyTelModify" class="col-sm-2 control-label"><img
 								src="<%=basePath%>plug-in/system/images/demo7.png" width="30"
 								height="30"></label>
 							<div class="col-sm-10">
-								<input id="familyTel" name="familyTel" type="text" class="form-control"
+								<input id="familyTelModify" name="familyTelModify" type="text" class="form-control"
 									placeholder="联系方式" style="width: 310px;">
 							</div>
 						</div>

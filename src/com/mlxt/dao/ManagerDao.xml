@@ -72,6 +72,19 @@
         )
     </insert>
     
+    <update id="updatePolice" parameterType="com.mlxt.pojo.Policeman">
+        update police_info
+        <trim prefix="set" suffixOverrides=",">
+        <if test="account != null and account != ''">
+            account = #{account},
+        </if>
+        <if test="password != null and password != ''">
+            password = #{password},
+        </if>
+        </trim>
+        where account = #{account}
+    </update>
+    
     <delete id="deletePolice" parameterType="String">
         <if test="account != null and account != ''">
             delete from police_info where account = #{account}
@@ -89,7 +102,7 @@
             b.fm_name = #{name},
         </if>
         <if test="password != null and password != ''">
-            password = #{password},
+            a.password = #{password},
         </if>
         </trim>
         <trim prefix="where" prefixOverrides="and">
@@ -99,5 +112,54 @@
         </if>
         </trim>
     </update>
+    
+    <update id="updateOnlyUser" parameterType="com.mlxt.pojo.User">
+        update user_info
+        <trim prefix="set" suffixOverrides=",">
+        <if test="tel != null and tel != ''">
+            tel = #{tel},
+        </if>
+        <if test="password != null and password != ''">
+            password = #{password},
+        </if>
+        </trim>
+        where tel = #{tel}
+    </update>
+    
+    <delete id="deleteUser" parameterType="String">
+        <if test="tel != null and tel != ''">
+            delete from user_info where tel = #{tel}
+        </if>
+    </delete>
+    
+    <delete id="deleteOldMan" parameterType="Integer">
+        <if test="oldManId != null and oldManId != ''">
+            delete from old_info where id = #{oldManId}
+        </if>
+    </delete>
+    
+    <delete id="deleteManager" parameterType="String">
+        <if test="account != null and account != ''">
+            delete from admin_info where account = #{account}
+        </if>
+    </delete>
+    
+    <insert id="insertManager" parameterType="com.mlxt.pojo.Manager">
+        insert into admin_info(
+        <if test="account != null and account != ''">
+            account,
+        </if>
+        <if test="password != null and password != ''">
+            password
+        </if>
+        )value(
+        <if test="account != null and account != ''">
+            #{account},
+        </if>
+        <if test="password != null and password != ''">
+            #{password}
+        </if>
+        )
+    </insert>
     
 </mapper>

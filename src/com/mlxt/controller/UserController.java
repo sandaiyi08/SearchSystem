@@ -448,8 +448,6 @@ public class UserController {
 		Integer oldManId = (Integer) session.getAttribute("OLDMAN_ID_SESSION");
 		Integer rows = 0;
 		
-		System.out.println(oldMan);
-		
 		// Create imgPath
 		if (imgFile != null && imgFile.getOriginalFilename() != null && imgFile.getOriginalFilename() != "") {
 			// Path

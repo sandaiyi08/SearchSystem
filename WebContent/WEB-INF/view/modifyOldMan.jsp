@@ -104,6 +104,7 @@
         			alert("图片文件大小不得超过10M！");
         			return false;
         		}
+        		alert("正在编码图片，请稍后...");
         	}
         	oldManInfoModify();
         }
@@ -111,7 +112,6 @@
     
     function oldManInfoModify() {
     	var formData = new FormData($("#modifyOldManForm")[0]);
-    	alert("正在编码图片，请稍后...");
     	$.ajax({
     		type: "post",
     		url: "modifyOldMan.do",

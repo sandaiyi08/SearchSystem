@@ -65,6 +65,13 @@ public interface ManagerDao {
 	public Integer insertPoliceman(Policeman policeman);
 	
 	/**
+	 * ·修改警察信息
+	 * @param policeman
+	 * @return
+	 */
+	public Integer updatePolice(Policeman policeman);
+	
+	/**
 	 * ·警察删除
 	 * @param account
 	 * @return
@@ -72,10 +79,45 @@ public interface ManagerDao {
 	public Integer deletePolice(String account);
 	
 	/**
-	 * ·修改用户信息
+	 * ·修改用户与相应家庭成员信息
 	 * @param user
 	 * @return
 	 */
 	public Integer updateUser(User user);
+	
+	/**
+	 * ·修改用户信息
+	 * @param user
+	 * @return
+	 */
+	public Integer updateOnlyUser(User user);
+	
+	/**
+	 * ·用户删除
+	 * @param tel
+	 * @return
+	 */
+	public Integer deleteUser(String tel);
+	
+	/**
+	 * ·老人信息删除
+	 * @param oldManId
+	 * @return
+	 */
+	public Integer deleteOldMan(Integer oldManId);
+	
+	/**
+	 * ·管理员添加
+	 * @param manager
+	 * @return
+	 */
+	public Integer insertManager(Manager manager);
+	
+	/**
+	 * ·管理员信息删除
+	 * @param account
+	 * @return
+	 */
+	public Integer deleteManager(String account);
 	
 }
