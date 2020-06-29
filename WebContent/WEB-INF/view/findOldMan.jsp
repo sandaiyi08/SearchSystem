@@ -11,6 +11,7 @@
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
     String savePath = basePath+"plug-in/person-data/";
+    session.setAttribute("basePath", basePath);
     session.setAttribute("savePath", savePath);
     session.setAttribute("indexPath", indexPath);
     session.setAttribute("policePath", basePath+"mlxt/police/");

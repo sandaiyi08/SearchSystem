@@ -158,6 +158,7 @@ public class PolicemanController {
 					in = new BufferedReader(new InputStreamReader(process.getInputStream()));
 					result = in.readLine();
 					if (result.equalsIgnoreCase("OK")) {
+						session.setAttribute("OLDMAN_IMG_PATH", img.getImgPath());
 						oldManId = img.getId();
 						break;
 					}
@@ -188,7 +189,15 @@ public class PolicemanController {
 	@RequestMapping("/findResult")
 	public String policeResultPage(Model model, HttpSession session) {
 		indexPath = (String) session.getAttribute("indexPath");
+		String basePath = (String) session.getAttribute("basePath");
 		OldMan oldMan = (OldMan) session.getAttribute("OLDMAN_SESSON");
+		String oldManImgRealPath = (String) session.getAttribute("OLDMAN_IMG_PATH");
+		
+		if (oldManImgRealPath != null && oldManImgRealPath != "") {
+			String sysRealPath = session.getServletContext().getRealPath("");
+			String oldManImgPath = basePath + oldManImgRealPath.substring(sysRealPath.length()).replaceAll("\\\\", "/");
+			session.setAttribute("IMG_SESSION", oldManImgPath);
+		}
 		model.addAttribute("oldMan", oldMan);
 		return "findOldManInfo";
 	}

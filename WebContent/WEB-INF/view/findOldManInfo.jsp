@@ -11,9 +11,11 @@
     String managePath = path+"/mlxt/manage/";
     String systemPath = path+"/mlxt/";
     String savePath = basePath+"plug-in/person-data/";
+    session.setAttribute("basePath", basePath);
     session.setAttribute("savePath", savePath);
     session.setAttribute("indexPath", indexPath);
     session.setAttribute("policePath", basePath+"mlxt/police/");
+    String imgPath = (String) session.getAttribute("IMG_SESSION");
 %>
 <!DOCTYPE html>
 <html>
@@ -114,6 +116,7 @@ div.transbox {
 	width: 120px;
 	left: 400px;
 	top: 5px;
+	z-index: -1;
 }
 </style>
 </head>
@@ -143,7 +146,7 @@ div.transbox {
 					<br>
 					<p>住址:${oldMan.address}</p>
 				</div>
-				<!-- <div class="photo"></div> -->
+				<div class="photo"><img style="height: 120px; width: 120px;" alt="OldManImag" src="<%=imgPath %>"></div>
 				<div class="div_hengline" style="width: 90%; top: 94%; left: 1px;">
 					<div class="modal-footer">
 						<h4 class="modal-title text-left" id="myModalLabel">家庭成员</h4>
